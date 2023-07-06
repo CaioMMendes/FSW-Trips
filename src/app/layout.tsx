@@ -1,36 +1,31 @@
-import { NextAuthProvider } from '@/providers/auth'
-import './globals.css'
+import { NextAuthProvider } from "@/providers/auth";
+import "./globals.css";
 
-import { Poppins } from 'next/font/google'
+import { Poppins } from "next/font/google";
+import Header from "../components/header/Header";
 
 const poppins = Poppins({
-  subsets: ['latin'], weight: [
-    '400',
-    '500',
-    '600',
-    '700',
-    '800',
-    '900',
-  ]
-})
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800", "900"],
+});
 export const metadata = {
-  title: 'Trips',
-  description: 'Book your trip',
-}
+  title: "Trips",
+  description: "Book your trip",
+};
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="en">
-      <body className={poppins.className}>
+      <body className={`${poppins.className} `}>
         <NextAuthProvider>
+          <Header />
           {children}
         </NextAuthProvider>
-
       </body>
     </html>
-  )
+  );
 }
