@@ -18,7 +18,7 @@ interface InputProps extends ReactDatePickerProps {
 
 function DatePickerInput(
   { className, error, errorMessage, ...props }: InputProps,
-  ref: LegacyRef<HTMLInputElement> | undefined
+  ref: LegacyRef<HTMLInputElement>
 ) {
   const datePickerInputClassName = twMerge(
     "rounded-lg border border-gray-400 bg-white p-2 text-sm font-normal text-dark placeholder-black placeholder-opacity-50 outline-none transition-all focus:ring-1 focus:ring-primary",
