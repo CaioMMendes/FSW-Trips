@@ -10,7 +10,7 @@ interface TripReservationPorps {
 
 const TripReservation = ({ trip }: TripReservationPorps) => {
   return (
-    <div className="px-5 pt-5 pb-10 flex flex-col gap-2">
+    <div className="px-5 pt-5  flex flex-col gap-2 ">
       <div className="flex gap-2">
         <DatePicker
           className="w-full"
@@ -28,7 +28,9 @@ const TripReservation = ({ trip }: TripReservationPorps) => {
         <p className="text-primaryDarker text-sm font-medium">Total</p>
         <p className="text-primaryDarker text-sm font-medium">R$</p>
       </div>
-      <Button>Reservar agora</Button>
+      <div className="pb-10 border border-b-grayLight w-full">
+        <Button className="w-full">Reservar agora</Button>
+      </div>
     </div>
   );
 };

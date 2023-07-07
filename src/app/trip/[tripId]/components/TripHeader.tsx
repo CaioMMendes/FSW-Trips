@@ -8,7 +8,7 @@ interface TripProps {
 
 const TripHeader = ({ trip }: TripProps) => {
   return (
-    <>
+    <div className="flex flex-col justify-center gap-4">
       <div className="relative h-[280px] w-full">
         <Image
           src={`${trip.coverImage}`}
@@ -32,7 +32,7 @@ const TripHeader = ({ trip }: TripProps) => {
           por dia
         </p>
       </div>
-    </>
+    </div>
   );
 };
 

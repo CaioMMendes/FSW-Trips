@@ -20,11 +20,10 @@ const TripDetails = async ({ params }: { params: { tripId: string } }) => {
   }
   return (
     <div>
-      <div className="flex flex-col justify-center gap-4">
-        <TripHeader trip={trip} />
-      </div>
-
+      <TripHeader trip={trip} />
       <TripReservation trip={trip} />
+
+      <h1>asdasd</h1>
     </div>
   );
 };
