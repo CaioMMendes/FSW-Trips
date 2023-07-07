@@ -9,25 +9,6 @@ const getTrips = async () => {
 
 const RecommendedTrips = async () => {
   const data = await getTrips();
-  // const data = await fetch(`http://localhost:3000/api/trip`).then((res) =>
-  //   res.json()
-  // );
-  // const data = await fetch(`${process.env.BASE_URL}/api/trip`).then((res) => {
-  // const data = await fetchTrips();
-
-  // try {
-  //   const data = await fetch(`${process.env.BASE_URL}/api/trip`)
-  //     .then((res) => {
-  //       // return res.json();
-  //       return console.log(res);
-  //     })
-  //     .catch((error) => {
-  //       return console.log(error);
-  //     });
-  //   console.log(data);
-  // } catch (error) {
-  //   throw new Error();
-  // }
 
   return (
     <div className="flex flex-col items-center justify-center gap-4 p-5">

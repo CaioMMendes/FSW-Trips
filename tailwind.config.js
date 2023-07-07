@@ -10,8 +10,12 @@ module.exports = {
   ],
   theme: {
     extend: {
+      backgroundColor: {
+        'walterWhite': "#f5f5f5"
+      },
       backgroundImage: {
-        'search-background': 'url(/world-map.png)'
+        'search-background': 'url(/world-map.png)',
+
       },
       colors: {
         primary: '#590bd8',

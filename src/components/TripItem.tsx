@@ -9,7 +9,7 @@ interface TripProps {
 
 const TripItem = ({ trip }: TripProps) => {
   return (
-    <Link href={`/trip/${trip.id}`}>
+    <Link href={`/trip/${trip.id}`} /* target="_blank"*/>
       <div className="flex flex-col gap-2">
         <div className="relative h-[280px] w-[280px]">
           <Image
