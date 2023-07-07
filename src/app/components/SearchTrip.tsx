@@ -1,8 +1,8 @@
-import Input from "@/components/Input";
-import DatePicker from "@/components/DatePicker";
-import CurrencyInput from "@/components/CurrencyInput";
+"use client";
 import Button from "@/components/Button";
-import QuickSearch from "./QuickSearch";
+import CurrencyInput from "@/components/CurrencyInput";
+import DatePicker from "@/components/DatePicker";
+import Input from "@/components/Input";
 
 const SearchTrip = () => {
   return (
@@ -16,7 +16,11 @@ const SearchTrip = () => {
       <div className="flex flex-col mt-5 gap-4">
         <Input placeholder="Onde você quer ir?" />
         <div className="flex gap-4">
-          <DatePicker className="w-full" placeholderText="Data de ida" />
+          <DatePicker
+            className="w-full"
+            placeholderText="Data de ida"
+            onChange={() => {}}
+          />
           <CurrencyInput placeholder="Orçamento" />
         </div>
         <Button>Pesquisar</Button>
