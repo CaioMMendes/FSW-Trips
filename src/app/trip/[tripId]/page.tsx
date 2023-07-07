@@ -3,6 +3,7 @@ import Image from "next/image";
 import ReactCountryFlag from "react-country-flag";
 import TripHeader from "./components/TripHeader";
 import TripReservation from "./components/TripReservation";
+import AboutTrip from "./components/AboutTrip";
 
 const getTripDetails = async (tripId: string) => {
   const trip = await prisma.trip.findUnique({
@@ -22,7 +23,7 @@ const TripDetails = async ({ params }: { params: { tripId: string } }) => {
     <div>
       <TripHeader trip={trip} />
       <TripReservation trip={trip} />
-
+      <AboutTrip description={trip.description} />
       <h1>asdasd</h1>
     </div>
   );
