@@ -8,9 +8,15 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 interface TripReservationPorps {
-  trip: Trip;
+  startDate: Date;
+  endDate: Date;
+  maxGuests: Number;
 }
-const TripReservation = ({ trip }: TripReservationPorps) => {
+const TripReservation = ({
+  startDate,
+  endDate,
+  maxGuests,
+}: TripReservationPorps) => {
   type TripReservationFormData = z.infer<typeof tripReservationFormSchema>;
 
   const tripReservationFormSchema = z.object({
@@ -34,6 +40,7 @@ const TripReservation = ({ trip }: TripReservationPorps) => {
     handleSubmit,
     formState: { errors },
     control,
+    watch,
   } = useForm<TripReservationFormData>({
     resolver: zodResolver(tripReservationFormSchema),
   });
@@ -41,6 +48,8 @@ const TripReservation = ({ trip }: TripReservationPorps) => {
     console.log({ data });
     console.log(1231);
   };
+
+  const startDateWatch = watch("startDate");
 
   return (
     <div className="px-5 pt-5  flex flex-col gap-2 ">
@@ -56,6 +65,7 @@ const TripReservation = ({ trip }: TripReservationPorps) => {
               errorMessage={errors.startDate?.message}
               selected={field.value}
               onChange={field.onChange}
+              minDate={startDateWatch ?? startDate}
             />
           )}
         />
@@ -70,6 +80,7 @@ const TripReservation = ({ trip }: TripReservationPorps) => {
               errorMessage={errors.endDate?.message}
               selected={field.value}
               onChange={field.onChange}
+              maxDate={endDate}
             />
           )}
         />
@@ -78,7 +89,7 @@ const TripReservation = ({ trip }: TripReservationPorps) => {
         {...register("guests")}
         error={!!errors?.guests}
         errorMessage={errors?.guests?.message}
-        placeholder={`Número de hóspedes (máx: ${trip.maxGuests})`}
+        placeholder={`Número de hóspedes (máx: ${maxGuests})`}
       />
       <div className="flex justify-between">
         <p className="text-primaryDarker text-sm font-medium">Total</p>
