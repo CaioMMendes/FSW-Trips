@@ -6,17 +6,20 @@ import { Trip } from "@prisma/client";
 import { Controller, useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { differenceInDays } from "date-fns";
 
-interface TripReservationPorps {
+interface TripReservationProps {
   startDate: Date;
   endDate: Date;
-  maxGuests: Number;
+  maxGuests: number;
+  pricePerDay: number;
 }
 const TripReservation = ({
   startDate,
   endDate,
   maxGuests,
-}: TripReservationPorps) => {
+  pricePerDay,
+}: TripReservationProps) => {
   type TripReservationFormData = z.infer<typeof tripReservationFormSchema>;
 
   const tripReservationFormSchema = z.object({
@@ -50,6 +53,18 @@ const TripReservation = ({
   };
 
   const startDateWatch = watch("startDate");
+  const endDateWatch = watch("endDate");
+  const minDate = () => {
+    const currentDate = new Date(Date.now());
+    if (startDateWatch === null) {
+      return null;
+    }
+    if (startDateWatch <= currentDate) {
+      return currentDate;
+    } else {
+      return startDateWatch;
+    }
+  };
 
   return (
     <div className="px-5 pt-5  flex flex-col gap-2 ">
@@ -65,7 +80,7 @@ const TripReservation = ({
               errorMessage={errors.startDate?.message}
               selected={field.value}
               onChange={field.onChange}
-              minDate={startDateWatch ?? startDate}
+              minDate={startDate}
             />
           )}
         />
@@ -81,6 +96,7 @@ const TripReservation = ({
               selected={field.value}
               onChange={field.onChange}
               maxDate={endDate}
+              minDate={startDateWatch ?? startDate}
             />
           )}
         />
@@ -93,7 +109,12 @@ const TripReservation = ({
       />
       <div className="flex justify-between">
         <p className="text-primaryDarker text-sm font-medium">Total</p>
-        <p className="text-primaryDarker text-sm font-medium">R$</p>
+        <p className="text-primaryDarker text-sm font-medium">
+          R${" "}
+          {startDateWatch && endDateWatch
+            ? differenceInDays(endDateWatch, startDateWatch) * pricePerDay
+            : "0,00"}
+        </p>
       </div>
       <div className="pb-10 border border-b-grayLight w-full">
         <Button onClick={() => handleSubmit(onSubmit)()} className="w-full">
