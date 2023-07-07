@@ -19,9 +19,11 @@ model Trip {
   //pode ter 8 casas e dois pontos flutuantes
   pricePerDay     Decimal           @db.Decimal(8, 2)
   description     String
+  countryCode     String
+  recommended     Boolean           @default(false)
   coverImage      String
   imageUrl        String[]
-  hightlights     String[]
+  highlights      String[]
   maxGuests       Int
   tripReservation TripReservation[]
 }

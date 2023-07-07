@@ -1,3 +1,4 @@
+"use client";
 import _CurrencyInput, { CurrencyInputProps } from "react-currency-input-field";
 import { twMerge } from "tailwind-merge";
 

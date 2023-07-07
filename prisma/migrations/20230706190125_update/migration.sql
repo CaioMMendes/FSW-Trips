@@ -1,9 +1,17 @@
 /*
   Warnings:
 
+  - You are about to drop the column `hightlights` on the `Trip` table. All the data in the column will be lost.
   - A unique constraint covering the columns `[email]` on the table `User` will be added. If there are existing duplicate values, this will fail.
+  - Added the required column `countryCode` to the `Trip` table without a default value. This is not possible if the table is not empty.
 
 */
+-- AlterTable
+ALTER TABLE "Trip" DROP COLUMN "hightlights",
+ADD COLUMN     "countryCode" TEXT NOT NULL,
+ADD COLUMN     "highlights" TEXT[],
+ADD COLUMN     "recomended" BOOLEAN NOT NULL DEFAULT false;
+
 -- AlterTable
 ALTER TABLE "User" ADD COLUMN     "email" TEXT,
 ADD COLUMN     "emailVerified" TIMESTAMP(3),
