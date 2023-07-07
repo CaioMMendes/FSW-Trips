@@ -39,9 +39,9 @@ const LoginButton = () => {
             />
           )}
           {isOpenMenu && (
-            <div className="absolute top-12 left-0 w-full h-full  rounded-lg shadow-md flex flex-col justify-center items-center">
+            <div className="absolute top-12 left-0 w-full h-full z-50 bg-white border border-primaryLighter  rounded-lg shadow-md flex flex-col justify-center items-center">
               <button
-                className="text-primary text-sm font-semibold select-none"
+                className="text-primary text-sm w-full h-full  font-semibold select-none"
                 onClick={handleLogoutClick}
               >
                 Logout
