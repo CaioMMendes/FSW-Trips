@@ -32,7 +32,7 @@ const InfoBox = ({
         </div>
         <div className="flex flex-col gap-1">
           <p className="text-primaryDarker font-semibold">{name}</p>
-          <div className="flex gap-1">
+          <div className="flex gap-1 items-center">
             <ReactCountryFlag countryCode={countryCode} svg />
             <p className="text-secondaryGray text-sm font-medium underline">
               {location}
