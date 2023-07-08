@@ -25,7 +25,21 @@ const TripReservation = ({
   type TripReservationFormData = z.infer<typeof tripReservationFormSchema>;
 
   const tripReservationFormSchema = z.object({
-    guests: z.string().nonempty("O número de hóspedes é obrigatório"),
+    guests: z
+      .number({
+        required_error: "O número de hóspedes é obrigatório",
+        invalid_type_error: "Insira um número válido",
+      })
+      .int()
+      .gte(1, "O número de hóspedes precisa ser igual ou maior que 1")
+      .lte(
+        maxGuests,
+        `O número de hóspedes não pode ser maior que ${maxGuests}`
+      ),
+    // .max(
+    //   maxGuests,
+    //   `O número de hóspedes não pode ser maior que ${maxGuests}`
+    // ),
     startDate: z
       .date({
         required_error: "A data inicial é obrigatória",
@@ -68,7 +82,7 @@ const TripReservation = ({
         type: "manual",
         message: "Este intervalo de datas está indisponível.",
       });
-      setError("endDate", {
+      return setError("endDate", {
         type: "manual",
         message: "Este intervalo de datas está indisponível.",
       });
@@ -80,7 +94,7 @@ const TripReservation = ({
       });
     }
     if (res?.error?.code === "INVALID_END_DATE") {
-      setError("endDate", {
+      return setError("endDate", {
         type: "manual",
         message: "Data inválida.",
       });
@@ -139,8 +153,11 @@ const TripReservation = ({
         />
       </div>
       <Input
-        {...register("guests")}
+        {...register("guests", {
+          valueAsNumber: true,
+        })}
         error={!!errors?.guests}
+        type="number"
         errorMessage={errors?.guests?.message}
         placeholder={`Número de hóspedes (máx: ${maxGuests})`}
       />
