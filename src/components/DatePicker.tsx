@@ -30,6 +30,7 @@ function DatePickerInput(
     <div className="flex w-full flex-col">
       <DatePicker
         locale="pt-BR"
+        dateFormat="dd/MM/yyyy"
         wrapperClassName="w-full"
         className={datePickerInputClassName}
         enableTabLoop={false}

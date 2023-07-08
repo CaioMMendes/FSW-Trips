@@ -19,10 +19,12 @@ const TripDetails = async ({ params }: { params: { tripId: string } }) => {
   if (trip === null) {
     return;
   }
+  console.log(trip.startDate);
   return (
     <div>
       <TripHeader trip={trip} />
       <TripReservation
+        tripId={trip.id}
         startDate={trip.startDate}
         endDate={trip.endDate}
         maxGuests={trip.maxGuests}
