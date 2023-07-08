@@ -7,6 +7,7 @@ import { Controller, useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { differenceInDays } from "date-fns";
+import { useRouter } from "next/navigation";
 
 interface TripReservationProps {
   tripId: string;
@@ -54,6 +55,7 @@ const TripReservation = ({
       .nullable(),
   });
 
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -88,7 +90,7 @@ const TripReservation = ({
       });
     }
     if (res?.error?.code === "INVALID_START_DATE") {
-      setError("startDate", {
+      return setError("startDate", {
         type: "manual",
         message: "Data inválida.",
       });
@@ -99,6 +101,12 @@ const TripReservation = ({
         message: "Data inválida.",
       });
     }
+
+    router.push(
+      `/trip/${tripId}/confirmation?startDate=${data.startDate?.toISOString()}&endDate=${data.endDate?.toISOString()}&guests=${
+        data.guests
+      }`
+    );
 
     console.log(res);
   };
