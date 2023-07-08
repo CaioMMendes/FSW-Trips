@@ -15,9 +15,11 @@ const LoginButton = () => {
   return (
     <>
       {status === "authenticated" && data.user && (
-        <div className="flex items-center my-auto h-12 border rounded-[40px] border-secondaryGray p-2 pl-3 gap-3 relative">
+        <div
+          onClick={handleMenuClick}
+          className="flex cursor-pointer items-center my-auto h-12 border rounded-[40px] border-secondaryGray p-2 pl-3 gap-3 relative"
+        >
           <Menu
-            onClick={handleMenuClick}
             width={24}
             height={24}
             className="text-secondaryGray cursor-pointer"

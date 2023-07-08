@@ -26,7 +26,7 @@ const Details = ({ startDate, endDate, guests }: IDetails) => {
           </div>
         </div>
 
-        <Button>Comprar</Button>
+        <Button>Finalizar Compra</Button>
       </div>
     </div>
   );
