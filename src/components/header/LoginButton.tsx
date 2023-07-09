@@ -3,6 +3,7 @@ import { useSession, signIn, signOut } from "next-auth/react";
 import { Menu, UserCircle2 } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
+import Link from "next/link";
 const LoginButton = () => {
   const [isOpenMenu, setIsOpenMenu] = useState(false);
   const handleLoginClick = () => signIn();
@@ -10,6 +11,7 @@ const LoginButton = () => {
     signOut();
     setIsOpenMenu(false);
   };
+
   const handleMenuClick = () => setIsOpenMenu(!isOpenMenu);
   const { status, data } = useSession();
   return (
@@ -41,9 +43,15 @@ const LoginButton = () => {
             />
           )}
           {isOpenMenu && (
-            <div className="absolute top-12 left-0 w-full h-full z-50 bg-white border border-primaryLighter  rounded-lg shadow-md flex flex-col justify-center items-center">
+            <div className="absolute gap-1 top-12 left-0 w-full  z-50 bg-white border border-primaryLighter  rounded-lg shadow-md flex flex-col justify-center items-center">
+              <Link href={"/my-trips"}>
+                <button className="text-primary  text-sm w-full h-12 hover:text-primaryDarker transition duration-150 font-semibold select-none">
+                  Minhas Viagens
+                </button>
+              </Link>
+              <div className="flex h-[1px] w-full bg-primaryLighter"></div>
               <button
-                className="text-primary text-sm w-full h-full  font-semibold select-none"
+                className="text-primary text-sm w-full  min-h-[32px] hover:text-primaryDarker transition duration-150 font-semibold select-none"
                 onClick={handleLogoutClick}
               >
                 Logout
