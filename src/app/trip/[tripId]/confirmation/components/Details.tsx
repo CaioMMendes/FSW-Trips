@@ -25,8 +25,6 @@ const Details = ({ startDate, endDate, guests }: IDetails) => {
             <p className="text-sm leading-6">{guests} hospedes</p>
           </div>
         </div>
-
-        <Button>Finalizar Compra</Button>
       </div>
     </div>
   );

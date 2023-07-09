@@ -18,6 +18,9 @@ export async function POST(request: Request) {
       })
     );
   }
+  console.log(new Date(req.startDate));
+  console.log(new Date(trip.startDate));
+
   if (isBefore(new Date(req.startDate), new Date(trip.startDate))) {
     console.log("startDate", new Date(req.startDate), new Date(trip.startDate));
     return new NextResponse(

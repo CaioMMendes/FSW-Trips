@@ -8,6 +8,8 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { MoveLeft } from "lucide-react";
+import Button from "@/components/Button";
+import { toastError, toastSuccess } from "@/components/Toastify";
 interface ITripConfirmation {
   params: {
     tripId: string;
@@ -19,7 +21,7 @@ const TripConfirmation = ({ params }: ITripConfirmation) => {
   const [totalPrice, setTotalPrice] = useState<number>(0);
   const searchParams = useSearchParams();
   const router = useRouter();
-  const { status } = useSession();
+  const { status, data } = useSession();
   useEffect(() => {
     const fetchTrip = async () => {
       const response = await fetch("http://localhost:3000/api/trip/check", {
@@ -52,11 +54,32 @@ const TripConfirmation = ({ params }: ITripConfirmation) => {
   const startDate = new Date(searchParams.get("startDate") as string);
   const endDate = new Date(searchParams.get("endDate") as string);
   const guests = searchParams.get("guests") as string;
+
+  const handleBuyClick = async () => {
+    const res = await fetch("http://localhost:3000/api/trip/reservation", {
+      method: "POST",
+      body: Buffer.from(
+        JSON.stringify({
+          tripId: params.tripId,
+          startDate: searchParams.get("startDate"),
+          endDate: searchParams.get("endDate"),
+          guests: Number(searchParams.get("guests")),
+          userId: (data?.user as any).id!,
+          totalPaid: totalPrice,
+        })
+      ),
+    });
+    if (res.ok) {
+      toastSuccess("Reserva realizada com sucesso!");
+    } else {
+      toastError("Ocorreu um erro");
+    }
+  };
   return (
     <div className="flex flex-col ">
       <div className="flex h-[1px] w-full bg-secondaryGray"></div>
       <Link href={`/trip/${trip.id}`} className="mt-3 mb-1">
-        <div className="flex  mb-1 ml-2  text-primary">
+        <div className="flex  mb-1 ml-5  text-primary">
           <MoveLeft width={32} height={24} /> Voltar
         </div>
       </Link>
@@ -74,6 +97,8 @@ const TripConfirmation = ({ params }: ITripConfirmation) => {
             totalPrice={totalPrice}
           />
           <Details startDate={startDate} endDate={endDate} guests={guests} />
+
+          <Button onClick={handleBuyClick}>Finalizar Compra</Button>
         </div>
       </div>
     </div>

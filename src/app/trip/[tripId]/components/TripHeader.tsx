@@ -12,7 +12,7 @@ const TripHeader = ({ trip }: TripProps) => {
   return (
     <>
       <Link href={"/"}>
-        <div className="flex  mb-1 ml-2  text-primary">
+        <div className="flex  mb-1 ml-5  text-primary">
           <MoveLeft width={32} height={24} /> Voltar
         </div>
       </Link>

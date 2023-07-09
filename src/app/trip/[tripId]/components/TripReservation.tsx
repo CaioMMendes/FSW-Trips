@@ -8,6 +8,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { differenceInDays } from "date-fns";
 import { useRouter } from "next/navigation";
+import { addDays } from "date-fns";
 
 interface TripReservationProps {
   tripId: string;
@@ -54,7 +55,7 @@ const TripReservation = ({
       })
       .nullable(),
   });
-
+  console.log(startDate);
   const router = useRouter();
   const {
     register,
@@ -67,7 +68,9 @@ const TripReservation = ({
     resolver: zodResolver(tripReservationFormSchema),
   });
   const onSubmit = async (data: TripReservationFormData) => {
-    console.log({ data });
+    if (data.startDate === null || data.endDate === null) {
+      return;
+    }
     const response = await fetch("http://localhost:3000/api/trip/check", {
       method: "POST",
       body: Buffer.from(
@@ -75,6 +78,8 @@ const TripReservation = ({
           tripId,
           startDate: data.startDate,
           endDate: data.endDate,
+          // startDate: addDays(data.startDate, 1),
+          // endDate: addDays(data.endDate, 1),
         })
       ),
     });
@@ -115,10 +120,10 @@ const TripReservation = ({
   const endDateWatch = watch("endDate");
   const minDate = () => {
     const currentDate = new Date(Date.now());
-    if (startDateWatch === null) {
+    if (startDateWatch === null || startDate === null) {
       return null;
     }
-    if (startDateWatch <= currentDate) {
+    if (startDateWatch <= currentDate || startDate <= currentDate) {
       return currentDate;
     } else {
       return startDateWatch;
@@ -140,6 +145,8 @@ const TripReservation = ({
               selected={field.value}
               onChange={field.onChange}
               minDate={startDate}
+              // minDate={minDate()}
+              maxDate={endDate}
             />
           )}
         />
