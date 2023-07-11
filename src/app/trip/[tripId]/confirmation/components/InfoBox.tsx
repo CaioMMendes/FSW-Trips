@@ -41,7 +41,7 @@ const InfoBox = ({
         </div>
       </div>
 
-      <div className="flex h-[1px] w-full bg-secondaryGray"></div>
+      <div className="flex h-[1px] w-full bg-primaryLighter"></div>
 
       <div className="flex flex-col gap-5">
         <p className="text-primaryDarker text-sm font-semibold">

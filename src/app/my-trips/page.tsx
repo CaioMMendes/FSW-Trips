@@ -4,14 +4,18 @@ import { authOptions } from "../api/auth/[...nextauth]/route";
 import { getServerSession } from "next-auth";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { TripReservation } from "@prisma/client";
+import { Prisma, TripReservation } from "@prisma/client";
 import UserReservationItem from "./components/UserReservationItem";
 
 const MyTrips = () => {
   const router = useRouter();
 
   const { status, data } = useSession();
-  const [reservations, setReservatios] = useState<TripReservation[]>([]);
+  const [reservations, setReservatios] = useState<
+    Prisma.TripReservationGetPayload<{
+      include: { trip: true };
+    }>[]
+  >([]);
 
   useEffect(() => {
     if (status === "unauthenticated" || !data?.user) {
