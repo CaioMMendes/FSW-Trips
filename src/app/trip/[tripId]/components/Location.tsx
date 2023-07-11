@@ -1,6 +1,6 @@
 import Button from "@/components/Button";
 import Image from "next/image";
-
+import GoogleMaps from "./GoogleMaps";
 interface TripLocationProps {
   location: string;
   locationDescription: string;
@@ -12,7 +12,7 @@ const Location = ({ location, locationDescription }: TripLocationProps) => {
       <p className="flex flex-start font-semibold text-primaryDarker">
         Localização
       </p>
-      <div className="relative h-[280px] w-full">
+      <div className="relative h-[280px] flex justify-center w-3/4 mx-auto">
         <Image
           src={"/map-mobile.png"}
           alt={`${location} image`}
@@ -20,6 +20,7 @@ const Location = ({ location, locationDescription }: TripLocationProps) => {
           style={{ objectFit: "cover" }}
           className="rounded-lg shadow-md"
         />
+        <GoogleMaps />
       </div>
 
       <div className="flex flex-col gap-1">
@@ -28,7 +29,6 @@ const Location = ({ location, locationDescription }: TripLocationProps) => {
           {locationDescription}
         </p>
       </div>
-      <Button variant="primary">Ver no Google Maps</Button>
     </div>
   );
 };

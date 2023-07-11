@@ -9,6 +9,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { differenceInDays } from "date-fns";
 import { useRouter } from "next/navigation";
 import { addDays } from "date-fns";
+import { setHours } from "date-fns";
 
 interface TripReservationProps {
   tripId: string;
@@ -55,7 +56,7 @@ const TripReservation = ({
       })
       .nullable(),
   });
-  console.log(startDate);
+
   const router = useRouter();
   const {
     register,
@@ -78,8 +79,6 @@ const TripReservation = ({
           tripId,
           startDate: data.startDate,
           endDate: data.endDate,
-          // startDate: addDays(data.startDate, 1),
-          // endDate: addDays(data.endDate, 1),
         })
       ),
     });
@@ -129,6 +128,24 @@ const TripReservation = ({
       return startDateWatch;
     }
   };
+  const minDateEnd = () => {
+    const currentDate = new Date(Date.now());
+    const currentDayUpdated = addDays(currentDate, 1);
+    if (startDateWatch === null || startDate === null) {
+      return null;
+    }
+    const startDateUpdated = addDays(startDateWatch, 1);
+    if (startDateWatch <= currentDate) {
+      console.log(currentDayUpdated);
+      console.log(startDateWatch);
+      return currentDayUpdated;
+    } else if (startDateWatch >= currentDate) {
+      console.log(startDateUpdated);
+      return startDateUpdated;
+    } else if (startDate <= currentDate) {
+      return currentDayUpdated;
+    }
+  };
   console.log("start date", startDate);
   return (
     <div className="px-5 pt-5  flex flex-col gap-2 ">
@@ -144,8 +161,7 @@ const TripReservation = ({
               errorMessage={errors.startDate?.message}
               selected={field.value}
               onChange={field.onChange}
-              minDate={startDate}
-              // minDate={minDate()}
+              minDate={minDate()}
               maxDate={endDate}
             />
           )}
@@ -162,7 +178,8 @@ const TripReservation = ({
               selected={field.value}
               onChange={field.onChange}
               maxDate={endDate}
-              minDate={startDateWatch ?? startDate}
+              // minDate={startDateWatch ?? startDate}
+              minDate={minDateEnd()}
             />
           )}
         />
