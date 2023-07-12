@@ -5,6 +5,7 @@ import ReservationDetails from "./ReservationDetails";
 import Button from "@/components/Button";
 import { toastError, toastSuccess } from "@/components/Toastify";
 import { Dispatch, SetStateAction } from "react";
+import { Swalfire } from "@/components/Swalfire";
 
 interface UserReservationItemProps {
   reservation: Prisma.TripReservationGetPayload<{
@@ -69,7 +70,12 @@ const UserReservationItem /*:React.FC<UserReservationItemProps> */ = ({
           R$ {Number(reservation.totalPaid)}
         </p>
       </div>
-      <Button variant="outlined" onClick={handleDeleteClick}>
+      <Button
+        variant="outlined"
+        onClick={() => {
+          Swalfire(handleDeleteClick);
+        }}
+      >
         Cancelar Reserva
       </Button>
     </div>

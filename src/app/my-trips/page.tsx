@@ -20,13 +20,13 @@ const MyTrips = () => {
   >([]);
 
   useEffect(() => {
-    if (status === "unauthenticated" || !data?.user) {
+    if (status === "unauthenticated") {
       return router.push("/");
     }
 
     const fetchReservation = async () => {
       const response = await fetch(
-        `http://localhost:3000/api/user/${(data?.user as any).id}/trip`
+        `http://localhost:3000/api/user/${(data?.user as any)?.id}/trip`
       );
       const json = await response.json();
 
