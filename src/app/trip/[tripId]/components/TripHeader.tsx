@@ -1,21 +1,27 @@
+"use client";
 import { Trip } from "@prisma/client";
 import { MoveLeft } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import ReactCountryFlag from "react-country-flag";
+import { useRouter } from "next/navigation";
 
 interface TripProps {
   trip: Trip;
 }
 
 const TripHeader = ({ trip }: TripProps) => {
+  const router = useRouter();
+  const handleClick = () => {
+    router.back();
+  };
   return (
     <>
-      <Link href={"/"}>
+      <button onClick={handleClick}>
         <div className="flex  mb-1 ml-5  text-primary">
           <MoveLeft width={32} height={24} /> Voltar
         </div>
-      </Link>
+      </button>
       <div className="flex flex-col justify-center gap-4">
         <div className="relative h-[280px] w-full">
           <Image

@@ -71,6 +71,7 @@ const TripConfirmation = ({ params }: ITripConfirmation) => {
     });
     if (res.ok) {
       toastSuccess("Reserva realizada com sucesso!");
+      return router.push(`/my-trips`);
     } else {
       toastError("Ocorreu um erro");
     }

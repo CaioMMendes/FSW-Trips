@@ -1,16 +1,49 @@
+"use client";
 import { Prisma } from "@prisma/client";
 import ImageBox from "./ImageBox";
 import ReservationDetails from "./ReservationDetails";
 import Button from "@/components/Button";
+import { toastError, toastSuccess } from "@/components/Toastify";
+import { Dispatch, SetStateAction } from "react";
 
 interface UserReservationItemProps {
   reservation: Prisma.TripReservationGetPayload<{
     include: { trip: true };
   }>;
+  reservations: Prisma.TripReservationGetPayload<{
+    include: { trip: true };
+  }>[];
+
+  setReservations: Dispatch<
+    SetStateAction<
+      Prisma.TripReservationGetPayload<{
+        include: { trip: true };
+      }>[]
+    >
+  >;
 }
 
-const UserReservationItem = ({ reservation }: UserReservationItemProps) => {
+const UserReservationItem /*:React.FC<UserReservationItemProps> */ = ({
+  reservation,
+  reservations,
+  setReservations,
+}: UserReservationItemProps) => {
   const { trip } = reservation;
+
+  const handleDeleteClick = async () => {
+    try {
+      await fetch(`api/trip/reservation/${reservation.id}`, {
+        method: "DELETE",
+      });
+      const reservationsUpdated = reservations.filter((res) => {
+        return res.id !== reservation.id;
+      });
+      setReservations(reservationsUpdated);
+      toastSuccess("Reserva cancelada");
+    } catch (error) {
+      toastError("Ocorreu um erro");
+    }
+  };
   return (
     <div className="flex flex-col border rounded-xl border-grayLight shadow-lg p-5 gap-5">
       <ImageBox
@@ -18,6 +51,7 @@ const UserReservationItem = ({ reservation }: UserReservationItemProps) => {
         name={trip.name}
         coverImage={trip.coverImage}
         location={trip.location}
+        tripId={trip.id}
       />
       <div className="flex h-[1px] w-full bg-primaryLighter"></div>
       <ReservationDetails
@@ -35,7 +69,9 @@ const UserReservationItem = ({ reservation }: UserReservationItemProps) => {
           R$ {Number(reservation.totalPaid)}
         </p>
       </div>
-      <Button variant="outlined">Cancelar Reserva</Button>
+      <Button variant="outlined" onClick={handleDeleteClick}>
+        Cancelar Reserva
+      </Button>
     </div>
   );
 };
