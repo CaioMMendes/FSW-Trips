@@ -29,8 +29,6 @@ const TripsFinded = () => {
       if (response.ok) {
         const data = await response.json();
         setTrips(data);
-
-        console.log(data);
         data.length > 0
           ? setMessage("Listamos os melhores locais para você!")
           : setMessage(
