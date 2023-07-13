@@ -33,6 +33,7 @@ const MyTrips = () => {
       setReservatios(json);
     };
     fetchReservation();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [status]);
 
   return (
