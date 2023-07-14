@@ -62,7 +62,7 @@ const QuickSearch = () => {
         </Link>
 
         <Link
-          href={"/trip/search?text=chale&startDate=undefined&budget=undefined"}
+          href={"/trip/search?text=chalé&startDate=undefined&budget=undefined"}
         >
           <div className="flex flex-col items-center justify-center gap-1 cursor-pointer">
             <Image
