@@ -17,7 +17,11 @@ module.exports = {
         'search-background': 'url(/world-map.png)',
 
       },
+      fill: {
+        whiteTransparent: 'rgba(255, 255, 255, 0.5)',
+      },
       colors: {
+        whiteTransparent: 'rgba(255, 255, 255, 0.5)',
         primary: '#590bd8',
         primaryLighter: '#DDD5EA',
         primaryMiddle: '#c5b2e1',

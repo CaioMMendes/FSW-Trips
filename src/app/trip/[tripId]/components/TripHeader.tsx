@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import ReactCountryFlag from "react-country-flag";
 import { useRouter } from "next/navigation";
+import Slide from "@/components/Slide";
 
 interface TripProps {
   trip: Trip;
@@ -24,11 +25,16 @@ const TripHeader = ({ trip }: TripProps) => {
       </button>
       <div className="flex flex-col justify-center gap-4">
         <div className="relative h-[280px] w-full">
-          <Image
+          <Slide
+            imageUrl={trip.imageUrl}
+            coverImage={trip.coverImage}
+            name={trip.name}
+          />
+          {/* <Image
             src={`${trip.coverImage}`}
             alt={`${trip.name} cover image`}
             fill
-          />
+          /> */}
         </div>
         {/* Título e informações*/}
         <div className="flex flex-col px-5 gap-1">
