@@ -111,8 +111,6 @@ const TripReservation = ({
         data.guests
       }`
     );
-
-    console.log(res);
   };
 
   const startDateWatch = watch("startDate");
@@ -136,17 +134,13 @@ const TripReservation = ({
     }
     const startDateUpdated = addDays(startDateWatch, 1);
     if (startDateWatch <= currentDate) {
-      console.log(currentDayUpdated);
-      console.log(startDateWatch);
       return currentDayUpdated;
     } else if (startDateWatch >= currentDate) {
-      console.log(startDateUpdated);
       return startDateUpdated;
     } else if (startDate <= currentDate) {
       return currentDayUpdated;
     }
   };
-  console.log("start date", startDate);
   return (
     <div className="px-5 pt-5  flex flex-col gap-2 ">
       <div className="flex gap-2">

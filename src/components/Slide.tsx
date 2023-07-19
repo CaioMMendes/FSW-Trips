@@ -1,34 +1,6 @@
 "use client";
 
-// import React from "react";
-// import "keen-slider/keen-slider.min.css";
-// import { useKeenSlider } from "keen-slider/react"; // import from 'keen-slider/react.es' for to get an ES module
-
-// const Slide = () => {
-//   const [sliderRef, instanceRef] = useKeenSlider(
-//     {
-//       slideChanged() {
-//         console.log("slide changed");
-//       },
-//     },
-//     [
-//       // add plugins here
-//     ]
-//   );
-
-//   return (
-//     <div ref={sliderRef} className="keen-slider">
-//       <div className={`keen-slider__slide bg-blue-300`}>1</div>
-//       <div className={`keen-slider__slide bg-red-300`}>1</div>
-//       <div className={`keen-slider__slide bg-green-300`}>1</div>
-//     </div>
-//   );
-// };
-
-// export default Slide;
-
 import { useState } from "react";
-// import "./styles.css";
 import { useKeenSlider } from "keen-slider/react";
 import "keen-slider/keen-slider.min.css";
 import Image from "next/image";
@@ -117,8 +89,8 @@ export default function Slide({ coverImage, imageUrl, name }: Images) {
                   instanceRef.current?.moveToIdx(idx);
                 }}
                 className={
-                  "border-none w-2 h-2 bg-gray-50 rounded-full my-1 p-1 cursor-pointer focus:outline-none  " +
-                  (currentSlide === idx ? "bg-gray-700" : "")
+                  "border-none w-[9px] h-[9px] bg-gray-50 rounded-full my-1 p-1 cursor-pointer focus:outline-none  " +
+                  (currentSlide === idx ? "bg-primary" : "")
                 }
               ></button>
             );

@@ -1,5 +1,4 @@
 import { Trip } from "@prisma/client";
-import Image from "next/image";
 import Link from "next/link";
 import ReactCountryFlag from "react-country-flag";
 import Slide from "./Slide";
@@ -17,15 +16,6 @@ const TripItem = ({ trip }: TripProps) => {
           coverImage={trip.coverImage}
           name={trip.name}
         />
-        {/* <Image
-            src={trip.coverImage}
-            alt={`${trip.name} image`}
-            fill
-            style={{
-              objectFit: "cover",
-            }}
-            className="rounded-lg shadow-md"
-          /> */}
       </div>
       <Link href={`/trip/${trip.id}`} /* target="_blank"*/>
         <div /*className="flex flex-col items-center"*/>

@@ -6,7 +6,6 @@ export async function GET() {
     const trips = await prisma.trip.findMany();
     return new NextResponse(JSON.stringify(trips), { status: 200 });
   } catch (error) {
-    console.log(error);
     throw new Error();
   }
 }

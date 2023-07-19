@@ -50,7 +50,6 @@ const SearchTrip = () => {
         data.text
       }&startDate=${data.startDate?.toISOString()}&budget=${data.budget}`
     );
-    // console.log({ ...data, budget: +data.budget });
   };
   return (
     <form

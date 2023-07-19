@@ -67,18 +67,10 @@ export async function GET(request: Request) {
   const text = searchParams.get("text");
   const startDate = searchParams.get("startDate");
   const budget = searchParams.get("budget");
-  //   const formatedDate = new Date(startDate);
   const formatedBudget = Number(budget);
 
-  //   if (!text) {
-  //     return new NextResponse(JSON.stringify({ message: "Missing text param" }), {
-  //       status: 400,
-  //     });
-  //   }
-  console.log(text);
   const trips = await prisma.trip.findMany({
     where: generateSearchQuery(text, startDate, budget),
   });
-  console.log(trips);
   return new NextResponse(JSON.stringify(trips), { status: 200 });
 }

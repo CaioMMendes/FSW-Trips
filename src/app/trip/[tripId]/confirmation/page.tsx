@@ -10,6 +10,7 @@ import Link from "next/link";
 import { MoveLeft } from "lucide-react";
 import Button from "@/components/Button";
 import { toastError, toastSuccess } from "@/components/Toastify";
+import { loadStripe } from "@stripe/stripe-js";
 interface ITripConfirmation {
   params: {
     tripId: string;
@@ -34,7 +35,6 @@ const TripConfirmation = ({ params }: ITripConfirmation) => {
       });
 
       const res = await response.json();
-      console.log(res);
       if (res?.error?.code === "TRIP_ALREADY_RESERVED") {
         return router.push(`/`);
       }
@@ -56,7 +56,7 @@ const TripConfirmation = ({ params }: ITripConfirmation) => {
   const guests = searchParams.get("guests") as string;
 
   const handleBuyClick = async () => {
-    const res = await fetch("http://localhost:3000/api/trip/reservation", {
+    const res = await fetch("http://localhost:3000/api/payment", {
       method: "POST",
       body: Buffer.from(
         JSON.stringify({
@@ -64,14 +64,22 @@ const TripConfirmation = ({ params }: ITripConfirmation) => {
           startDate: searchParams.get("startDate"),
           endDate: searchParams.get("endDate"),
           guests: Number(searchParams.get("guests")),
-          userId: (data?.user as any).id!,
-          totalPaid: totalPrice,
+          imageUrl: trip.imageUrl,
+          coverImage: trip.coverImage,
+          totalPrice,
+          name: trip.name,
+          description: trip.description,
         })
       ),
     });
     if (res.ok) {
-      toastSuccess("Reserva realizada com sucesso!");
-      return router.push(`/my-trips`);
+      // toastSuccess("Reserva realizada com sucesso!");
+      const { sessionId } = await res.json();
+      const stripe = await loadStripe(
+        process.env.NEXT_PUBLIC_STRIPE_KEY as string
+      );
+      await stripe?.redirectToCheckout({ sessionId });
+      // return router.push(`/my-trips`);
     } else {
       toastError("Ocorreu um erro");
     }
