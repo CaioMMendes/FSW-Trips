@@ -72,7 +72,7 @@ const TripReservation = ({
     if (data.startDate === null || data.endDate === null) {
       return;
     }
-    const response = await fetch("http://localhost:3000/api/trip/check", {
+    const response = await fetch("/api/trip/check", {
       method: "POST",
       body: Buffer.from(
         JSON.stringify({

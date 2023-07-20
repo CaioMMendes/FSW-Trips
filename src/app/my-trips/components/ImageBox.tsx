@@ -18,7 +18,7 @@ const ImageBox = ({
   tripId,
 }: ImageBoxProps) => {
   return (
-    <Link href={`http://localhost:3000/trip/${tripId}`}>
+    <Link href={`https://FSW-Trips.vercel.app/trip/${tripId}`}>
       <div className="flex gap-5 items-center">
         <div className="relative h-[106px] w-[124px] ">
           <Image
