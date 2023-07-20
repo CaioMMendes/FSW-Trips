@@ -3,6 +3,7 @@ import Swal from "sweetalert2";
 export function Swalfire(
   handleAction: any,
   title: string,
+  html: string | string[],
   confirmText: string,
   cancelText: string,
   focusCancel: boolean,
@@ -11,7 +12,7 @@ export function Swalfire(
 ) {
   return Swal.fire({
     title,
-
+    html,
     showDenyButton: false,
     showCancelButton: true,
     confirmButtonText: confirmText,

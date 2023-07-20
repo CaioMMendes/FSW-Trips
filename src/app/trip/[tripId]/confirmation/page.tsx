@@ -64,7 +64,8 @@ const TripConfirmation = ({ params }: ITripConfirmation) => {
     if (stripeCheckbox === true) {
       Swalfire(
         handleBuyClick,
-        "Utilize o número de cartão",
+        "Para utilizar o stripe",
+        `<p>Use o número de cartão: 4242 4242 4242 4242</p>  <p>O restante dos dados utlize qualquer coisa</p>`,
         "Ok",
         "Cancelar",
         false,

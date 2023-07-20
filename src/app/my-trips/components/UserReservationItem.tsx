@@ -76,6 +76,7 @@ const UserReservationItem /*:React.FC<UserReservationItemProps> */ = ({
           Swalfire(
             handleDeleteClick,
             "Deseja cancelar esta viagem?",
+            "",
             "Sim",
             "Não",
             true,
