@@ -29,7 +29,9 @@ const TripsFinded = () => {
       const response = await fetch(
         `/api/trip/search?text=${searchParams.get("text") ?? ""}&startDate=${
           searchParams.get("startDate") ?? ""
-        }&budget=${searchParams.get("budget") ?? ""}`
+        }&endDate=${searchParams.get("endDate") ?? ""}&budget=${
+          searchParams.get("budget") ?? ""
+        }`
       );
       console.log(response);
       if (response.ok) {

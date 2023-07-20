@@ -4,6 +4,7 @@ import { NextResponse } from "next/server";
 const generateSearchQuery = (
   text?: string | null,
   startDate?: string | null,
+  endDate?: string | null,
   budget?: string | null
 ) => {
   let searchQuery;
@@ -38,8 +39,21 @@ const generateSearchQuery = (
       AND: [
         ...searchQuery.AND,
         {
+          startDate: {
+            lte: startDate,
+          },
+        },
+      ],
+    };
+  }
+  if (endDate !== "undefined" && endDate !== null) {
+    searchQuery = {
+      ...searchQuery,
+      AND: [
+        ...searchQuery.AND,
+        {
           endDate: {
-            gte: startDate,
+            gte: endDate,
           },
         },
       ],
@@ -67,7 +81,11 @@ export async function GET(request: Request) {
   let text = searchParams.get("text");
   let textModified;
   const startDate = searchParams.get("startDate");
+  const endDate = searchParams.get("endDate");
   const budget = searchParams.get("budget");
+  console.log(startDate);
+  console.log(endDate);
+  console.log(searchParams);
   if (searchParams.get("text")) {
     text = decodeURIComponent(searchParams.get("text")!);
     text = text.trim();
@@ -75,7 +93,7 @@ export async function GET(request: Request) {
   }
 
   const trips = await prisma.trip.findMany({
-    where: generateSearchQuery(textModified ?? "", startDate, budget),
+    where: generateSearchQuery(textModified ?? "", startDate, endDate, budget),
   });
 
   return new NextResponse(JSON.stringify(trips), { status: 200 });

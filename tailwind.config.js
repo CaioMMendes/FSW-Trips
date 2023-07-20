@@ -13,6 +13,7 @@ module.exports = {
       backgroundColor: {
         'walterWhite': "#f5f5f5"
       },
+
       backgroundImage: {
         'search-background': 'url(/world-map.png)',
 

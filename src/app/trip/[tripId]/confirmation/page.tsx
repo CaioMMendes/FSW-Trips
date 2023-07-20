@@ -117,7 +117,6 @@ const TripConfirmation = ({ params }: ITripConfirmation) => {
   };
   return (
     <div className="flex flex-col ">
-      <div className="flex h-[1px] w-full bg-secondaryGray"></div>
       <Link href={`/trip/${trip.id}`} className="mt-3 mb-1">
         <div className="flex  mb-1 ml-5  text-primary">
           <MoveLeft width={32} height={24} /> Voltar

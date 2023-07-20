@@ -7,6 +7,7 @@ import Input from "@/components/Input";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
+import { addDays } from "date-fns";
 
 const SearchTrip = () => {
   const router = useRouter();
@@ -23,7 +24,13 @@ const SearchTrip = () => {
       })
       .nullable()
       .optional(),
-
+    endDate: z
+      .date({
+        required_error: "A data final é obrigatória",
+        invalid_type_error: "Selecione uma data valida",
+      })
+      .nullable()
+      .optional(),
     budget: z
       .string()
       // .number({
@@ -48,8 +55,27 @@ const SearchTrip = () => {
     router.push(
       `/trip/search?text=${
         data.text
-      }&startDate=${data.startDate?.toISOString()}&budget=${data.budget}`
+      }&startDate=${data.startDate?.toISOString()}&endDate=${data.endDate?.toISOString()}&budget=${
+        data.budget
+      }`
     );
+  };
+  const startDateWatch = watch("startDate");
+  const endDateWatch = watch("endDate");
+  const minDateEnd = () => {
+    const currentDate = new Date(Date.now());
+    const currentDayUpdated = addDays(currentDate, 1);
+    if (startDateWatch === null || startDateWatch === undefined) {
+      return currentDayUpdated;
+    }
+    const startDateUpdated = addDays(startDateWatch, 1);
+    if (startDateWatch <= currentDate) {
+      return currentDayUpdated;
+    } else if (startDateWatch >= currentDate) {
+      return startDateUpdated;
+    } else {
+      return currentDayUpdated;
+    }
   };
   return (
     <form
@@ -65,7 +91,7 @@ const SearchTrip = () => {
       <div className="flex flex-col mt-5 gap-4">
         <Input
           {...register("text")}
-          placeholder="Onde você quer ir?"
+          placeholder="Onde você deseja ir?"
           error={!!errors.text}
           errorMessage={errors.text?.message}
         />
@@ -85,14 +111,21 @@ const SearchTrip = () => {
               />
             )}
           />
-          {/* <CurrencyInput
-            {...register("budget", {
-              valueAsNumber: true,
-            })}
-            placeholder="Orçamento"
-            type="number"
-            error={!!errors?.budget}
-          /> */}
+          <Controller
+            name="endDate"
+            control={control}
+            render={({ field }) => (
+              <DatePicker
+                className="w-full"
+                placeholderText="Data de volta"
+                error={!!errors.endDate}
+                errorMessage={errors.endDate?.message}
+                selected={field.value}
+                onChange={field.onChange}
+                minDate={minDateEnd()}
+              />
+            )}
+          />
 
           <Controller
             name="budget"
