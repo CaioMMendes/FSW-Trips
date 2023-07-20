@@ -21,13 +21,20 @@ const TripsFinded = () => {
 
   useEffect(() => {
     const fetchTrips = async () => {
+      // let decodedUrl = "";
+      // if (searchParams.get("text")) {
+      //   decodedUrl = decodeURIComponent(searchParams.get("text")!);
+      // }
+      // console.log(decodedUrl);
       const response = await fetch(
         `/api/trip/search?text=${searchParams.get("text") ?? ""}&startDate=${
           searchParams.get("startDate") ?? ""
         }&budget=${searchParams.get("budget") ?? ""}`
       );
+      console.log(response);
       if (response.ok) {
         const data = await response.json();
+        console.log(data);
         setTrips(data);
         data.length > 0
           ? setMessage("Listamos os melhores locais para você!")

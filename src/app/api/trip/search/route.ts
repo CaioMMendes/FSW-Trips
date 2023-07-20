@@ -38,7 +38,7 @@ const generateSearchQuery = (
       AND: [
         ...searchQuery.AND,
         {
-          startDate: {
+          endDate: {
             gte: startDate,
           },
         },
@@ -64,13 +64,19 @@ const generateSearchQuery = (
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
-  const text = searchParams.get("text");
+  let text = searchParams.get("text");
+  let textModified;
   const startDate = searchParams.get("startDate");
   const budget = searchParams.get("budget");
-  const formatedBudget = Number(budget);
+  if (searchParams.get("text")) {
+    text = decodeURIComponent(searchParams.get("text")!);
+    text = text.trim();
+    textModified = text.replace(/ /g, " & ");
+  }
 
   const trips = await prisma.trip.findMany({
-    where: generateSearchQuery(text, startDate, budget),
+    where: generateSearchQuery(textModified ?? "", startDate, budget),
   });
+
   return new NextResponse(JSON.stringify(trips), { status: 200 });
 }
