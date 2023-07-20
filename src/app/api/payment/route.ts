@@ -50,6 +50,7 @@ export async function POST(request: Request) {
       ],
       mode: "payment",
     });
+
     return new NextResponse(JSON.stringify({ sessionId: session.id }), {
       status: 200,
     });
