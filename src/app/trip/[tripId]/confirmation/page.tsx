@@ -11,6 +11,7 @@ import { MoveLeft } from "lucide-react";
 import Button from "@/components/Button";
 import { toastError, toastSuccess } from "@/components/Toastify";
 import { loadStripe } from "@stripe/stripe-js";
+import { Swalfire } from "@/components/Swalfire";
 interface ITripConfirmation {
   params: {
     tripId: string;
@@ -20,6 +21,7 @@ interface ITripConfirmation {
 const TripConfirmation = ({ params }: ITripConfirmation) => {
   const [trip, setTrip] = useState<Trip | null>();
   const [totalPrice, setTotalPrice] = useState<number>(0);
+  const [stripeCheckbox, setStripeCheckbox] = useState(true);
   const searchParams = useSearchParams();
   const router = useRouter();
   const { status, data } = useSession();
@@ -55,6 +57,30 @@ const TripConfirmation = ({ params }: ITripConfirmation) => {
   const endDate = new Date(searchParams.get("endDate") as string);
   const guests = searchParams.get("guests") as string;
 
+  const handleCheckbox = () => {
+    setStripeCheckbox(!stripeCheckbox);
+  };
+  const swalCheck = () => {
+    if (stripeCheckbox === true) {
+      Swalfire(
+        handleBuyClick,
+        "Utilize o número de cartão",
+        "Ok",
+        "Cancelar",
+        false,
+        "#aaa",
+        "#590bd8"
+      );
+      //          title: "Deseja cancelar esta viagem?",
+      // confirmText: "Sim",
+      // cancelText: "Não",
+      // focusCancel:true,
+      // confirmColor:"#aaa",
+      // cancelColor:"#590bd8");
+    } else if (stripeCheckbox === false) {
+      handleBuyClick();
+    }
+  };
   const handleBuyClick = async () => {
     const res = await fetch("/api/payment", {
       method: "POST",
@@ -69,17 +95,21 @@ const TripConfirmation = ({ params }: ITripConfirmation) => {
           totalPrice,
           name: trip.name,
           description: trip.description,
+          stripeCheckbox,
         })
       ),
     });
     if (res.ok) {
-      // toastSuccess("Reserva realizada com sucesso!");
-      const { sessionId } = await res.json();
-      const stripe = await loadStripe(
-        process.env.NEXT_PUBLIC_STRIPE_KEY as string
-      );
-      await stripe?.redirectToCheckout({ sessionId });
-      // return router.push(`/my-trips`);
+      if (stripeCheckbox === true) {
+        const { sessionId } = await res.json();
+        const stripe = await loadStripe(
+          process.env.NEXT_PUBLIC_STRIPE_KEY as string
+        );
+        await stripe?.redirectToCheckout({ sessionId });
+      } else if (stripeCheckbox === false) {
+        toastSuccess("Reserva realizada com sucesso!");
+        return router.push(`/my-trips`);
+      }
     } else {
       toastError("Ocorreu um erro");
     }
@@ -97,7 +127,6 @@ const TripConfirmation = ({ params }: ITripConfirmation) => {
           <h2 className="text-primaryDarker font-semibold text-xl leading-8">
             Sua Viagem
           </h2>
-
           <InfoBox
             coverImage={trip.coverImage}
             name={trip.name}
@@ -106,8 +135,19 @@ const TripConfirmation = ({ params }: ITripConfirmation) => {
             totalPrice={totalPrice}
           />
           <Details startDate={startDate} endDate={endDate} guests={guests} />
+          <label htmlFor="stripeOption" className="flex gap-1">
+            <input
+              type="checkbox"
+              name="stripeOption"
+              id="stripeOption"
+              className="accent-primary"
+              checked={stripeCheckbox}
+              onChange={handleCheckbox}
+            />
+            <p className="text-sm">Utilizar stripe para o pagamento</p>
+          </label>
 
-          <Button onClick={handleBuyClick}>Finalizar Compra</Button>
+          <Button onClick={swalCheck}>Finalizar Compra</Button>
         </div>
       </div>
     </div>

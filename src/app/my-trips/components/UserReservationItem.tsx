@@ -73,7 +73,15 @@ const UserReservationItem /*:React.FC<UserReservationItemProps> */ = ({
       <Button
         variant="outlined"
         onClick={() => {
-          Swalfire(handleDeleteClick);
+          Swalfire(
+            handleDeleteClick,
+            "Deseja cancelar esta viagem?",
+            "Sim",
+            "Não",
+            true,
+            "#590bd8",
+            "#aaa"
+          );
         }}
       >
         Cancelar Reserva

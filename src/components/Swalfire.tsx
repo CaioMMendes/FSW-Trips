@@ -1,18 +1,26 @@
 import Swal from "sweetalert2";
 
-export function Swalfire(handleAction: any) {
+export function Swalfire(
+  handleAction: any,
+  title: string,
+  confirmText: string,
+  cancelText: string,
+  focusCancel: boolean,
+  confirmColor: string,
+  cancelColor: string
+) {
   return Swal.fire({
-    title: "Deseja cancelar esta viagem?",
+    title,
 
     showDenyButton: false,
     showCancelButton: true,
-    confirmButtonText: "Sim",
-    cancelButtonText: "Não",
+    confirmButtonText: confirmText,
+    cancelButtonText: cancelText,
     background: "#FAFAFA",
-    cancelButtonColor: "#590bd8",
-    confirmButtonColor: "#aaa",
+    cancelButtonColor: confirmColor,
+    confirmButtonColor: cancelColor,
     color: "#312a4f",
-    focusCancel: true,
+    focusCancel,
   }).then((result) => {
     /* Read more about isConfirmed, isDenied below */
     if (result.isConfirmed) {
