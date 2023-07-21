@@ -1,5 +1,5 @@
 import { prisma } from "@/lib/prisma";
-import { differenceInDays, isBefore } from "date-fns";
+import { addDays, differenceInDays, isBefore } from "date-fns";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
@@ -44,7 +44,8 @@ export async function POST(request: Request) {
       }
     );
   }
-
+  const updatedStartDate = addDays(new Date(req.startDate), 1);
+  console.log(updatedStartDate);
   const reservation = await prisma.tripReservation.findMany({
     where: {
       tripId: req.tripId,
@@ -53,7 +54,7 @@ export async function POST(request: Request) {
         lte: new Date(req.endDate),
       },
       endDate: {
-        gte: new Date(req.startDate),
+        gte: new Date(updatedStartDate),
       },
     },
   });
