@@ -4,9 +4,14 @@ import GoogleMaps from "./GoogleMaps";
 interface TripLocationProps {
   location: string;
   locationDescription: string;
+  name: string;
 }
 
-const Location = ({ location, locationDescription }: TripLocationProps) => {
+const Location = ({
+  location,
+  locationDescription,
+  name,
+}: TripLocationProps) => {
   return (
     <div className="flex flex-col p-5 gap-5">
       <p className="flex flex-start font-semibold text-primaryDarker">
@@ -20,7 +25,7 @@ const Location = ({ location, locationDescription }: TripLocationProps) => {
           style={{ objectFit: "cover" }}
           className="rounded-lg shadow-md"
         />
-        <GoogleMaps />
+        <GoogleMaps text={name} />
       </div>
 
       <div className="flex flex-col gap-1">

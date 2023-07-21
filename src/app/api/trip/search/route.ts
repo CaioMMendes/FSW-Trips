@@ -83,9 +83,7 @@ export async function GET(request: Request) {
   const startDate = searchParams.get("startDate");
   const endDate = searchParams.get("endDate");
   const budget = searchParams.get("budget");
-  console.log(startDate);
-  console.log(endDate);
-  console.log(searchParams);
+
   if (searchParams.get("text")) {
     text = decodeURIComponent(searchParams.get("text")!);
     text = text.trim();

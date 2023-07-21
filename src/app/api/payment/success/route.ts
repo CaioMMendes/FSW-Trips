@@ -34,5 +34,8 @@ export async function POST(request: Request) {
     });
   } catch (error) {
     console.log(error);
+    return new NextResponse(JSON.stringify({ success: false }), {
+      status: 400,
+    });
   }
 }
