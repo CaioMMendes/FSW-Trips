@@ -10,6 +10,9 @@ import { differenceInDays } from "date-fns";
 import { useRouter } from "next/navigation";
 import { addDays } from "date-fns";
 import { setHours } from "date-fns";
+import { useEffect } from "react";
+import { minDate, minDateEnd } from "./MinDate";
+import GetDatesInRange from "./GetDatesInRange";
 
 interface TripReservationProps {
   tripId: string;
@@ -17,6 +20,10 @@ interface TripReservationProps {
   endDate: Date;
   maxGuests: number;
   pricePerDay: number;
+  tripsReservations: {
+    startDate: Date;
+    endDate: Date;
+  }[];
 }
 const TripReservation = ({
   tripId,
@@ -24,6 +31,7 @@ const TripReservation = ({
   endDate,
   maxGuests,
   pricePerDay,
+  tripsReservations,
 }: TripReservationProps) => {
   type TripReservationFormData = z.infer<typeof tripReservationFormSchema>;
 
@@ -58,6 +66,7 @@ const TripReservation = ({
   });
 
   const router = useRouter();
+
   const {
     register,
     handleSubmit,
@@ -115,32 +124,10 @@ const TripReservation = ({
 
   const startDateWatch = watch("startDate");
   const endDateWatch = watch("endDate");
-  const minDate = () => {
-    const currentDate = new Date(Date.now());
-    if (startDateWatch === null || startDate === null) {
-      return null;
-    }
-    if (startDateWatch <= currentDate || startDate <= currentDate) {
-      return currentDate;
-    } else {
-      return startDateWatch;
-    }
-  };
-  const minDateEnd = () => {
-    const currentDate = new Date(Date.now());
-    const currentDayUpdated = addDays(currentDate, 1);
-    if (startDateWatch === null || startDate === null) {
-      return null;
-    }
-    const startDateUpdated = addDays(startDateWatch, 1);
-    if (startDateWatch <= currentDate) {
-      return currentDayUpdated;
-    } else if (startDateWatch >= currentDate) {
-      return startDateUpdated;
-    } else if (startDate <= currentDate) {
-      return currentDayUpdated;
-    }
-  };
+  const reservedDates = GetDatesInRange(tripsReservations);
+
+  console.log(reservedDates);
+
   return (
     <div className="px-5 pt-5  flex flex-col gap-2 ">
       <div className="flex gap-2">
@@ -155,8 +142,9 @@ const TripReservation = ({
               errorMessage={errors.startDate?.message}
               selected={field.value}
               onChange={field.onChange}
-              minDate={minDate()}
+              minDate={minDate(startDateWatch, startDate)}
               maxDate={endDate}
+              excludeDates={reservedDates}
             />
           )}
         />
@@ -173,7 +161,8 @@ const TripReservation = ({
               onChange={field.onChange}
               maxDate={endDate}
               // minDate={startDateWatch ?? startDate}
-              minDate={minDateEnd()}
+              minDate={minDateEnd(startDateWatch, startDate, tripsReservations)}
+              excludeDates={reservedDates}
             />
           )}
         />

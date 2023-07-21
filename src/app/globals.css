@@ -9,3 +9,35 @@
   border-radius: 8px;
   background-color: #fafafabf;
 }
+/* 
+.react-datepicker {
+  font-family: RobotoMedium;
+  font-size: 14px !important;
+  color: green !important;
+
+  &__header {
+    background-color: #fafafa !important;
+    padding-top: 0px !important;
+    border: none !important;
+  }
+
+  &__day-name {
+    color: blue !important;
+    font-size: 14px !important;
+  }
+
+  &__day {
+    color: #000 !important;
+    font-size: 13px !important;
+
+    &--keyboard-selected,
+    &--selected {
+      border-radius: 25px !important;
+      background: #423312 !important;
+      color: #fafafa !important;
+    }
+    &--disabled {
+      color: red !important;
+    }
+  }
+} */

@@ -106,6 +106,9 @@ const SearchTrip = () => {
                 error={!!errors.startDate}
                 errorMessage={errors.startDate?.message}
                 selected={field.value}
+                // showMonthDropdown={true}
+                // showYearDropdown={true}
+                // excludeDates={[new Date("2023-07-25")]}
                 onChange={field.onChange}
                 minDate={new Date(Date.now())}
               />

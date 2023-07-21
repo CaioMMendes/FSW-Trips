@@ -14,11 +14,35 @@ const getTripDetails = async (tripId: string) => {
   return trip;
 };
 
+const getTripsReservatios = async (tripId: string) => {
+  // const response = await fetch(`/api/trip/reservation/${tripId}/getAll`, {
+  //   method: "GET",
+  // });
+
+  // const res = await response.json();
+  // console.log(res);
+  const tripsReservations = await prisma.tripReservation.findMany({
+    where: {
+      tripId: tripId,
+    },
+  });
+
+  return tripsReservations.map((reservation) => {
+    return {
+      startDate: reservation.startDate,
+      endDate: reservation.endDate,
+    };
+  });
+};
+
 const TripDetails = async ({ params }: { params: { tripId: string } }) => {
   const trip = await getTripDetails(params.tripId);
   if (trip === null) {
     return;
   }
+  const tripsReservations = await getTripsReservatios(params.tripId);
+  console.log(tripsReservations);
+
   return (
     <div>
       <TripHeader trip={trip} />
@@ -28,6 +52,7 @@ const TripDetails = async ({ params }: { params: { tripId: string } }) => {
         endDate={trip.endDate}
         maxGuests={Number(trip.maxGuests)}
         pricePerDay={Number(trip.pricePerDay)}
+        tripsReservations={tripsReservations}
       />
       <AboutTrip description={trip.description} />
       <HighlightsTrip highlights={trip.highlights} />
