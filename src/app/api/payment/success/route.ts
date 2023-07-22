@@ -35,8 +35,15 @@ export async function POST(request: Request) {
   } catch (error) {
     console.log("error payment", error);
 
-    return new NextResponse(JSON.stringify({ success: false, error: error }), {
-      status: 400,
-    });
+    return new NextResponse(
+      JSON.stringify({
+        success: false,
+        error: error,
+        request: request.headers,
+      }),
+      {
+        status: 400,
+      }
+    );
   }
 }
