@@ -21,7 +21,7 @@ const MyTrips = () => {
 
   useEffect(() => {
     if (status === "unauthenticated") {
-      return router.push("/");
+      return router.push("/user/unauthenticated");
     }
 
     const fetchReservation = async () => {

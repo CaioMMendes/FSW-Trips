@@ -44,7 +44,7 @@ const TripConfirmation = ({ params }: ITripConfirmation) => {
       setTotalPrice(res.totalPrice);
     };
     if (status === "unauthenticated") {
-      return router.push("/");
+      return router.push("/user/unauthenticated");
     }
     fetchTrip();
   }, [status, searchParams, params, router]);
