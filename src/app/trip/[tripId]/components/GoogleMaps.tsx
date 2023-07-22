@@ -8,13 +8,15 @@ const stylesMap = {
 };
 interface GoogleMapsProps {
   text: string;
+  latitude: string;
+  longitude: string;
 }
-const GoogleMaps = ({ text }: GoogleMapsProps) => {
+const GoogleMaps = ({ text, latitude, longitude }: GoogleMapsProps) => {
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: process.env.NEXT_PUBLIC_MAPS_API_KEY!,
   });
-  const position = { lat: 40.6307395, lng: 14.5941317 };
+  const position = { lat: +latitude, lng: +longitude };
   return (
     <>
       {isLoaded ? (

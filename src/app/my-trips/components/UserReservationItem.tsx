@@ -6,6 +6,7 @@ import Button from "@/components/Button";
 import { toastError, toastSuccess } from "@/components/Toastify";
 import { Dispatch, SetStateAction } from "react";
 import { Swalfire } from "@/components/Swalfire";
+import { differenceInDays } from "date-fns";
 
 interface UserReservationItemProps {
   reservation: Prisma.TripReservationGetPayload<{
@@ -45,6 +46,13 @@ const UserReservationItem /*:React.FC<UserReservationItemProps> */ = ({
       toastError("Ocorreu um erro");
     }
   };
+  const daysDifference =
+    reservation.startDate && reservation.endDate
+      ? differenceInDays(
+          new Date(reservation.endDate),
+          new Date(reservation.startDate)
+        )
+      : 0;
   return (
     <div className="flex flex-col border rounded-xl border-grayLight shadow-lg p-5 gap-5">
       <ImageBox
@@ -65,7 +73,14 @@ const UserReservationItem /*:React.FC<UserReservationItemProps> */ = ({
         Informações sobre o pagamento
       </h1>
       <div className="flex justify-between">
-        <p className="text-sm text-primaryDarker">Total</p>
+        <p className="text-sm text-primaryDarker">
+          Total{" "}
+          {reservation.startDate && reservation.endDate
+            ? `(${daysDifference} ${
+                daysDifference === 1 ? "noite" : "noites"
+              }) `
+            : ""}
+        </p>
         <p className="text-primaryDarker text-sm leading-6">
           R$ {Number(reservation.totalPaid)}
         </p>

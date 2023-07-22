@@ -1,5 +1,9 @@
+"use client";
+
 import Button from "@/components/Button";
+import { differenceInDays } from "date-fns";
 import Image from "next/image";
+import { useSearchParams } from "next/navigation";
 import ReactCountryFlag from "react-country-flag";
 interface Props {
   coverImage: string;
@@ -16,6 +20,13 @@ const InfoBox = ({
   countryCode,
   totalPrice,
 }: Props) => {
+  const searchParams = useSearchParams();
+  const startDate = new Date(searchParams.get("startDate") as string);
+  const endDate = new Date(searchParams.get("endDate") as string);
+  console.log(startDate);
+  console.log(endDate);
+  const daysDifference =
+    startDate && endDate ? differenceInDays(endDate, startDate) : 0;
   return (
     <div className="flex flex-col border border-grayLight rounded-xl shadow-lg gap-5 p-5">
       <div className="flex gap-5 items-center">
@@ -48,7 +59,14 @@ const InfoBox = ({
           Informações sobre o preço
         </p>
         <div className="flex justify-between">
-          <p className="text-sm text-primaryDarker">Total</p>
+          <p className="text-sm text-primaryDarker">
+            Total{" "}
+            {startDate && endDate
+              ? `(${daysDifference} ${
+                  daysDifference === 1 ? "noite" : "noites"
+                }) `
+              : ""}
+          </p>
           <p className="text-primaryDarker text-sm leading-6">
             R$ {totalPrice}
           </p>

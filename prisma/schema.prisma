@@ -26,6 +26,8 @@ model Trip {
   coverImage          String
   imageUrl            String[]
   highlights          String[]
+  latitude            String            @default("40.6307395")
+  longitude           String            @default("14.5941317")
   maxGuests           Int
   tripReservation     TripReservation[]
 }

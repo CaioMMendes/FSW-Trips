@@ -127,7 +127,10 @@ const TripReservation = ({
   const reservedDates = GetDatesInRange(tripsReservations);
 
   console.log(reservedDates);
-
+  const daysDifference =
+    endDateWatch && startDateWatch
+      ? differenceInDays(endDateWatch, startDateWatch)
+      : 0;
   return (
     <div className="px-5 pt-5  flex flex-col gap-2 ">
       <div className="flex gap-2">
@@ -177,11 +180,18 @@ const TripReservation = ({
         placeholder={`Número de hóspedes (máx: ${maxGuests})`}
       />
       <div className="flex justify-between">
-        <p className="text-primaryDarker text-sm font-medium">Total</p>
+        <p className="text-primaryDarker text-sm font-medium">
+          Total{" "}
+          {startDateWatch && endDateWatch
+            ? `(${daysDifference} ${
+                daysDifference === 1 ? "noite" : "noites"
+              }) `
+            : ""}
+        </p>
         <p className="text-primaryDarker text-sm font-medium">
           R${" "}
           {startDateWatch && endDateWatch
-            ? differenceInDays(endDateWatch, startDateWatch) * pricePerDay
+            ? daysDifference * pricePerDay
             : "0,00"}
         </p>
       </div>

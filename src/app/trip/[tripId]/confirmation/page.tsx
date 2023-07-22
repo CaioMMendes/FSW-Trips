@@ -72,12 +72,6 @@ const TripConfirmation = ({ params }: ITripConfirmation) => {
         "#aaa",
         "#590bd8"
       );
-      //          title: "Deseja cancelar esta viagem?",
-      // confirmText: "Sim",
-      // cancelText: "Não",
-      // focusCancel:true,
-      // confirmColor:"#aaa",
-      // cancelColor:"#590bd8");
     } else if (stripeCheckbox === false) {
       handleBuyClick();
     }

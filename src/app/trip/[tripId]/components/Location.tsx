@@ -5,12 +5,16 @@ interface TripLocationProps {
   location: string;
   locationDescription: string;
   name: string;
+  latitude: string;
+  longitude: string;
 }
 
 const Location = ({
   location,
   locationDescription,
   name,
+  latitude,
+  longitude,
 }: TripLocationProps) => {
   return (
     <div className="flex flex-col p-5 gap-5">
@@ -25,7 +29,7 @@ const Location = ({
           style={{ objectFit: "cover" }}
           className="rounded-lg shadow-md"
         />
-        <GoogleMaps text={name} />
+        <GoogleMaps text={name} latitude={latitude} longitude={longitude} />
       </div>
 
       <div className="flex flex-col gap-1">
