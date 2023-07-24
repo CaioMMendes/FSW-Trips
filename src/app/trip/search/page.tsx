@@ -57,7 +57,7 @@ const TripsFinded = () => {
         </div>
       </Link>
 
-      <div className="flex flex-col items-center p-5 gap-5 ">
+      <div className="flex flex-col items-center p-5 gap-5  ">
         <div className="flex flex-col items-center">
           <h1 className="text-primaryDarker text-xl leading-6 font-semibold">
             Hospedagens Encontradas
@@ -70,9 +70,11 @@ const TripsFinded = () => {
             <p className="font-medium text-secondaryGray">{message}</p>
           )}
         </div>
-        {trips?.map((trip) => (
-          <TripItem key={trip.id} trip={trip} />
-        ))}
+        <div className="lg:flex-row lg:flex-wrap gap-5  md:flex-row md:flex-wrap md:justify-center lg:gap-8 lg:justify-center flex flex-col">
+          {trips?.map((trip) => (
+            <TripItem key={trip.id} trip={trip} />
+          ))}
+        </div>
       </div>
     </>
   );

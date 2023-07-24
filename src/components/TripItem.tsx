@@ -15,6 +15,7 @@ const TripItem = ({ trip }: TripProps) => {
           imageUrl={trip.imageUrl}
           coverImage={trip.coverImage}
           name={trip.name}
+          tripId={trip.id}
         />
       </div>
       <Link href={`/trip/${trip.id}`} /* target="_blank"*/>

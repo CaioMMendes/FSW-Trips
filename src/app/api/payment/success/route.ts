@@ -39,6 +39,7 @@ export async function POST(request: Request) {
       JSON.stringify({
         success: false,
         error: error,
+        // request: request.headers,
       }),
       {
         status: 400,

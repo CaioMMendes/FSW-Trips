@@ -4,13 +4,15 @@ import { useState } from "react";
 import { useKeenSlider } from "keen-slider/react";
 import "keen-slider/keen-slider.min.css";
 import Image from "next/image";
+import Link from "next/link";
 
 interface Images {
   coverImage: string;
   imageUrl: string[];
   name: string;
+  tripId: string;
 }
-export default function Slide({ coverImage, imageUrl, name }: Images) {
+export default function Slide({ coverImage, imageUrl, name, tripId }: Images) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [loaded, setLoaded] = useState(false);
   const [sliderRef, instanceRef] = useKeenSlider<HTMLDivElement>({
@@ -28,23 +30,9 @@ export default function Slide({ coverImage, imageUrl, name }: Images) {
       <div className="relative">
         <div ref={sliderRef} className="keen-slider">
           <div className="keen-slider__slide bg-gray-400 flex items-center justify-center text-[50px] text-gray-50 max-h-screen h-72">
-            <Image
-              src={coverImage}
-              alt={`${name} image`}
-              fill
-              style={{
-                objectFit: "cover",
-              }}
-              className="rounded-lg shadow-md"
-            />
-          </div>
-          {imageUrl.map((image, index) => (
-            <div
-              key={index}
-              className="keen-slider__slide bg-gray-400 flex items-center justify-center text-[50px] text-gray-50 max-h-screen h-72"
-            >
+            <Link href={`/trip/${tripId}`}>
               <Image
-                src={image}
+                src={coverImage}
                 alt={`${name} image`}
                 fill
                 style={{
@@ -52,6 +40,24 @@ export default function Slide({ coverImage, imageUrl, name }: Images) {
                 }}
                 className="rounded-lg shadow-md"
               />
+            </Link>
+          </div>
+          {imageUrl.map((image, index) => (
+            <div
+              key={index}
+              className="keen-slider__slide bg-gray-400 flex items-center justify-center text-[50px] text-gray-50 max-h-screen h-72"
+            >
+              <Link href={`/trip/${tripId}`}>
+                <Image
+                  src={image}
+                  alt={`${name} image`}
+                  fill
+                  style={{
+                    objectFit: "cover",
+                  }}
+                  className="rounded-lg shadow-md"
+                />
+              </Link>
             </div>
           ))}
         </div>

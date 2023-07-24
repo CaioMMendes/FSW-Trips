@@ -80,15 +80,15 @@ const SearchTrip = () => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="mx-auto px-5 pt-5 bg-search-background bg-cover bg-center bg-no-repeat"
+      className="mx-auto px-5 pt-5 lg:py-8 bg-search-background bg-cover bg-center bg-no-repeat"
     >
-      <h1 className="text-primaryDarker font-semibold text-2xl flex justify-center items-center">
+      <h1 className="text-primaryDarker font-semibold text-2xl flex justify-center items-center lg:text-3xl">
         <p>
           Encontre sua próxima <span className="text-primary"> viagem!</span>
         </p>
       </h1>
 
-      <div className="flex flex-col mt-5 gap-4">
+      <div className="flex flex-col  mt-5 gap-4">
         <Input
           {...register("text")}
           placeholder="Onde você deseja ir?"
@@ -136,6 +136,7 @@ const SearchTrip = () => {
             render={({ field }) => (
               <CurrencyInput
                 placeholder="Orçamento"
+                className="w-full"
                 error={!!errors.budget}
                 errorMessage={errors.budget?.message}
                 value={field.value ? Number(field.value) : undefined}

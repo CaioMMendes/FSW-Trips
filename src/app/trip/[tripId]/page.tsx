@@ -15,12 +15,6 @@ const getTripDetails = async (tripId: string) => {
 };
 
 const getTripsReservatios = async (tripId: string) => {
-  // const response = await fetch(`/api/trip/reservation/${tripId}/getAll`, {
-  //   method: "GET",
-  // });
-
-  // const res = await response.json();
-  // console.log(res);
   const tripsReservations = await prisma.tripReservation.findMany({
     where: {
       tripId: tripId,
