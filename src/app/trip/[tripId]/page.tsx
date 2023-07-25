@@ -38,18 +38,24 @@ const TripDetails = async ({ params }: { params: { tripId: string } }) => {
   console.log(tripsReservations);
 
   return (
-    <div>
+    <div className="lg:px-20 ">
       <TripHeader trip={trip} />
-      <TripReservation
-        tripId={trip.id}
-        startDate={trip.startDate}
-        endDate={trip.endDate}
-        maxGuests={Number(trip.maxGuests)}
-        pricePerDay={Number(trip.pricePerDay)}
-        tripsReservations={tripsReservations}
-      />
-      <AboutTrip description={trip.description} />
-      <HighlightsTrip highlights={trip.highlights} />
+      <div className="flex flex-col lg:flex-row gap-5">
+        <div className="lg:order-2 lg:mt-8">
+          <TripReservation
+            tripId={trip.id}
+            startDate={trip.startDate}
+            endDate={trip.endDate}
+            maxGuests={Number(trip.maxGuests)}
+            pricePerDay={Number(trip.pricePerDay)}
+            tripsReservations={tripsReservations}
+          />
+        </div>
+        <div className="lg:order-1">
+          <AboutTrip description={trip.description} />
+          <HighlightsTrip highlights={trip.highlights} />
+        </div>
+      </div>
       <Location
         location={trip.location}
         latitude={trip.latitude}

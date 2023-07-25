@@ -5,16 +5,33 @@ import { useKeenSlider } from "keen-slider/react";
 import "keen-slider/keen-slider.min.css";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
+type ImageClickHandler = (url: string) => void;
 interface Images {
   coverImage: string;
   imageUrl: string[];
   name: string;
   tripId: string;
+  redirectUrl: string | null;
 }
-export default function Slide({ coverImage, imageUrl, name, tripId }: Images) {
+export default function Slide({
+  coverImage,
+  imageUrl,
+  name,
+  tripId,
+  redirectUrl,
+}: Images) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [loaded, setLoaded] = useState(false);
+  const router = useRouter();
+  const handleImageClick = () => {
+    if (redirectUrl === null) {
+      return;
+    } else {
+      return router.push(redirectUrl);
+    }
+  };
   const [sliderRef, instanceRef] = useKeenSlider<HTMLDivElement>({
     initial: 0,
     slideChanged(slider) {
@@ -27,37 +44,43 @@ export default function Slide({ coverImage, imageUrl, name, tripId }: Images) {
 
   return (
     <>
-      <div className="relative">
+      <div className="relative ">
         <div ref={sliderRef} className="keen-slider">
-          <div className="keen-slider__slide bg-gray-400 flex items-center justify-center text-[50px] text-gray-50 max-h-screen h-72">
-            <Link href={`/trip/${tripId}`}>
+          <div className="keen-slider__slide rounded-lg  flex items-center justify-center text-[50px] text-gray-50 max-h-screen h-72">
+            {/* <Link href={`/trip/${tripId}`}> */}
+            <Image
+              src={coverImage}
+              alt={`${name} image`}
+              fill
+              style={{
+                objectFit: "cover",
+              }}
+              className={`rounded-lg shadow-md ${
+                redirectUrl === null ? "" : "cursor-pointer"
+              }`}
+              onClick={handleImageClick}
+            />
+            {/* </Link> */}
+          </div>
+          {imageUrl.map((image, index) => (
+            <div
+              key={index}
+              className="keen-slider__slide  rounded-lg flex items-center justify-center text-[50px] text-gray-50 max-h-screen h-72"
+            >
+              {/* <Link href={`/trip/${tripId}`}> */}
               <Image
-                src={coverImage}
+                src={image}
                 alt={`${name} image`}
                 fill
                 style={{
                   objectFit: "cover",
                 }}
-                className="rounded-lg shadow-md"
+                className={`rounded-lg shadow-md ${
+                  redirectUrl === null ? "" : "cursor-pointer"
+                }`}
+                onClick={handleImageClick}
               />
-            </Link>
-          </div>
-          {imageUrl.map((image, index) => (
-            <div
-              key={index}
-              className="keen-slider__slide bg-gray-400 flex items-center justify-center text-[50px] text-gray-50 max-h-screen h-72"
-            >
-              <Link href={`/trip/${tripId}`}>
-                <Image
-                  src={image}
-                  alt={`${name} image`}
-                  fill
-                  style={{
-                    objectFit: "cover",
-                  }}
-                  className="rounded-lg shadow-md"
-                />
-              </Link>
+              {/* </Link> */}
             </div>
           ))}
         </div>
@@ -84,23 +107,25 @@ export default function Slide({ coverImage, imageUrl, name, tripId }: Images) {
         )}
       </div>
       {loaded && instanceRef.current && (
-        <div className="flex absolute bottom-[2px] px-2 gap-1 w-full mx-auto justify-center">
-          {[
-            ...Array(instanceRef.current.track.details.slides.length).keys(),
-          ].map((idx) => {
-            return (
-              <button
-                key={idx}
-                onClick={() => {
-                  instanceRef.current?.moveToIdx(idx);
-                }}
-                className={
-                  "border-none w-[9px] h-[9px] bg-gray-50 rounded-full my-1 p-1 cursor-pointer focus:outline-none  " +
-                  (currentSlide === idx ? "bg-primary" : "")
-                }
-              ></button>
-            );
-          })}
+        <div className="flex justify-center">
+          <div className="flex absolute bottom-[2px] px-2 gap-1 w-fit  items-center  justify-center">
+            {[
+              ...Array(instanceRef.current.track.details.slides.length).keys(),
+            ].map((idx) => {
+              return (
+                <button
+                  key={idx}
+                  onClick={() => {
+                    instanceRef.current?.moveToIdx(idx);
+                  }}
+                  className={
+                    "border-none w-[9px]  h-[9px] bg-gray-50 rounded-full my-1 p-1 cursor-pointer focus:outline-none  " +
+                    (currentSlide === idx ? "bg-primary" : "")
+                  }
+                ></button>
+              );
+            })}
+          </div>
         </div>
       )}
     </>

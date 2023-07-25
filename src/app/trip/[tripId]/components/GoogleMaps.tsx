@@ -21,7 +21,11 @@ const GoogleMaps = ({ text, latitude, longitude }: GoogleMapsProps) => {
     <>
       {isLoaded ? (
         <GoogleMap
-          mapContainerStyle={{ width: "100%", height: "100%" }}
+          mapContainerStyle={{
+            width: "100%",
+            height: "100%",
+            borderRadius: "8px",
+          }}
           center={position}
           zoom={12}
           options={{ streetViewControl: false }}

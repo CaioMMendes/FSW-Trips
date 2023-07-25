@@ -132,7 +132,11 @@ const TripReservation = ({
       ? differenceInDays(endDateWatch, startDateWatch)
       : 0;
   return (
-    <div className="px-5 pt-5  flex flex-col gap-2 ">
+    <div className="px-5 pt-5  flex flex-col gap-2 lg:min-w-[380px] lg:border-grayLight lg:border lg:rounded-lg lg:shadow-md">
+      <p className="text-xl text-primaryDarker mb-4 hidden lg:block">
+        <span className="font-semibold">R$ {pricePerDay}</span>/Dia
+      </p>
+
       <div className="flex gap-2">
         <Controller
           name="startDate"
@@ -180,7 +184,7 @@ const TripReservation = ({
         placeholder={`Número de hóspedes (máx: ${maxGuests})`}
       />
       <div className="flex justify-between">
-        <p className="text-primaryDarker text-sm font-medium">
+        <p className="text-primaryDarker text-sm lg:text-base font-medium">
           Total{" "}
           {startDateWatch && endDateWatch
             ? `(${daysDifference} ${
@@ -188,18 +192,17 @@ const TripReservation = ({
               }) `
             : ""}
         </p>
-        <p className="text-primaryDarker text-sm font-medium">
+        <p className="text-primaryDarker text-sm font-medium lg:text-base">
           R${" "}
           {startDateWatch && endDateWatch
             ? daysDifference * pricePerDay
             : "0,00"}
         </p>
       </div>
-      <div className="pb-10 border border-b-grayLight w-full">
-        <Button onClick={() => handleSubmit(onSubmit)()} className="w-full">
-          Reservar agora
-        </Button>
-      </div>
+      <Button onClick={() => handleSubmit(onSubmit)()} className="w-full mb-4">
+        Reservar agora
+      </Button>
+      <div className=" h-[1px] bg-grayLight lg:border-none"></div>
     </div>
   );
 };

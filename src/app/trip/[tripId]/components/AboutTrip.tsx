@@ -6,11 +6,11 @@ interface AboutTripProps {
 
 const AboutTrip = ({ description }: AboutTripProps) => {
   return (
-    <div className="flex flex-col p-5 pt-10 gap-1">
-      <div className="flex justify-start font-semibold  text-primaryDarker">
+    <div className="flex flex-col p-5 pt-3 lg:pt-8  gap-1">
+      <div className="flex justify-start font-semibold mt-5 lg:text-xl text-primaryDarker">
         Sobre a Viagem
       </div>
-      <p className="flex justify-start text-sm text-primaryDarker leading-5">
+      <p className="flex justify-start text-sm lg:text-base text-primaryDarker leading-5">
         {description}
       </p>
     </div>

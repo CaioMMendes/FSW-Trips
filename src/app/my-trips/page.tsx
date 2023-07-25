@@ -36,20 +36,22 @@ const MyTrips = () => {
 
   return (
     <div className="flex flex-col gap-5 p-5">
-      <h1 className="flex flex-start text-primaryDarker text-lg leading-8 font-semibold">
+      <h1 className="flex flex-start text-primaryDarker text-lg leading-8 font-semibold lg:text-2xl">
         Minhas Viagens
       </h1>
       {reservations.length > 0 ? (
-        reservations.map((reservation) => {
-          return (
-            <UserReservationItem
-              reservation={reservation}
-              reservations={reservations}
-              setReservations={setReservatios}
-              key={reservation.id}
-            />
-          );
-        })
+        <div className="flex flex-col lg:grid lg:grid-cols-2 lg:gap-10">
+          {reservations.map((reservation) => {
+            return (
+              <UserReservationItem
+                reservation={reservation}
+                reservations={reservations}
+                setReservations={setReservatios}
+                key={reservation.id}
+              />
+            );
+          })}
+        </div>
       ) : (
         <div className="flex flex-col gap-3">
           <p className="flex text-primaryDarker font-medium">

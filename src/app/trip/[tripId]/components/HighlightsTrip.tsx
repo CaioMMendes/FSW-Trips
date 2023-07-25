@@ -9,7 +9,7 @@ const HighlightsTrip = ({ highlights }: HighlightsPorps) => {
   //   }
   return (
     <div className="flex flex-col p-5 gap-2">
-      <p className="flex flex-start font-semibold text-primaryDarker">
+      <p className="flex flex-start font-semibold text-primaryDarker lg:text-xl">
         Destaques
       </p>
       <div className="flex flex-wrap gap-y-2">
@@ -22,7 +22,7 @@ const HighlightsTrip = ({ highlights }: HighlightsPorps) => {
                 height={15}
                 alt="Check icon"
               />
-              <p className="text-secondaryGray text-sm leading-6">
+              <p className="text-secondaryGray text-sm lg:text-base leading-6">
                 {highlight}
               </p>
             </div>

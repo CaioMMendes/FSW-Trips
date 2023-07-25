@@ -16,6 +16,7 @@ const TripItem = ({ trip }: TripProps) => {
           coverImage={trip.coverImage}
           name={trip.name}
           tripId={trip.id}
+          redirectUrl={`/trip/${trip.id}`}
         />
       </div>
       <Link href={`/trip/${trip.id}`} /* target="_blank"*/>

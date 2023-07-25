@@ -12,8 +12,8 @@ const Details = ({ startDate, endDate, guests }: IDetails) => {
       <div className="flex flex-col gap-5">
         <div className="flex justify-between items-center">
           <div className="flex flex-col">
-            <p className="text-sm leading-6">Data</p>
-            <p className="text-sm leading-6">
+            <p className="text-sm leading-6 lg:text-base font-medium">Data</p>
+            <p className="text-sm leading-6 lg:text-base">
               {format(startDate, "dd 'de' MMMM", { locale: ptBR })} {" - "}
               {format(endDate, "dd 'de' MMMM", { locale: ptBR })}
             </p>
@@ -21,8 +21,10 @@ const Details = ({ startDate, endDate, guests }: IDetails) => {
         </div>
         <div className="flex justify-start items-center">
           <div className="flex flex-col">
-            <p className="text-sm leading-6">Hóspedes</p>
-            <p className="text-sm leading-6">{guests} hospedes</p>
+            <p className="text-sm leading-6 lg:text-base font-medium">
+              Hóspedes
+            </p>
+            <p className="text-sm leading-6 lg:text-base">{guests} hospedes</p>
           </div>
         </div>
       </div>

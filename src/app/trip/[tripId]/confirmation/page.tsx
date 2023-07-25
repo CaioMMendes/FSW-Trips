@@ -110,15 +110,16 @@ const TripConfirmation = ({ params }: ITripConfirmation) => {
     }
   };
   return (
-    <div className="flex flex-col ">
-      <Link href={`/trip/${trip.id}`} className="mt-3 mb-1">
+    // <div className="flex justify-center">
+    <div className="flex flex-col  mx-auto">
+      <Link href={`/trip/${trip.id}`} className="mt-3 mb-1 max-md:hidden">
         <div className="flex  mb-1 ml-5  text-primary">
           <MoveLeft width={32} height={24} /> Voltar
         </div>
       </Link>
       <div className="flex flex-col px-5">
         <div className="flex flex-col gap-5">
-          <h2 className="text-primaryDarker font-semibold text-xl leading-8">
+          <h2 className="text-primaryDarker font-semibold text-xl leading-8 ">
             Sua Viagem
           </h2>
           <InfoBox
@@ -138,13 +139,16 @@ const TripConfirmation = ({ params }: ITripConfirmation) => {
               checked={stripeCheckbox}
               onChange={handleCheckbox}
             />
-            <p className="text-sm">Utilizar stripe para o pagamento</p>
+            <p className="text-sm lg:text-base">
+              Utilizar stripe para o pagamento
+            </p>
           </label>
 
           <Button onClick={swalCheck}>Finalizar Compra</Button>
         </div>
       </div>
     </div>
+    // </div>
   );
 };
 

@@ -51,7 +51,7 @@ const TripsFinded = () => {
 
   return (
     <>
-      <Link href={"/"}>
+      <Link href={"/"} className="max-sm:hidden">
         <div className="flex  mb-1 ml-5  text-primary">
           <MoveLeft width={32} height={24} /> Voltar
         </div>
@@ -70,7 +70,7 @@ const TripsFinded = () => {
             <p className="font-medium text-secondaryGray">{message}</p>
           )}
         </div>
-        <div className="lg:flex-row lg:flex-wrap gap-5  md:flex-row md:flex-wrap md:justify-center lg:gap-8 lg:justify-center flex flex-col">
+        <div className="lg:flex-row lg:flex-wrap gap-5  md:flex-row md:flex-wrap md:justify-start lg:gap-8 lg:justify-start flex flex-col">
           {trips?.map((trip) => (
             <TripItem key={trip.id} trip={trip} />
           ))}
