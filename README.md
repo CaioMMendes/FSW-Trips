@@ -1,38 +1,51 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+<div align="center" style="justify-content:center; display:flex; flex-direction:column; gap:20px">
+<img  title="Imagem do projeto web" src="https://cdn.discordapp.com/attachments/1124406159328170034/1133463545812619335/image.png" alt="Imagem do projeto web"  />
+<img  title="Imagem do projeto web" src="https://cdn.discordapp.com/attachments/1124406159328170034/1133463609960308766/image.png" alt="Imagem do projeto web"  />
+<img  title="Imagem do projeto web" src="https://cdn.discordapp.com/attachments/1124406159328170034/1133464668288057464/image.png" alt="Imagem do projeto web"  />
+<span style="border-bottom:1px solid #21262d"></span>
 
-First, run the development server:
+<div style="display:flex; justify-content:space-between; ">
+<img width="40%" title="Imagem do projeto mobile" src="https://cdn.discordapp.com/attachments/1124406159328170034/1133465019976269974/image.png" alt="Imagem do projeto mobile"  />
+<img width="40%"  title="Imagem do projeto mobile" src="https://cdn.discordapp.com/attachments/1124406159328170034/1133465155250958406/image.png" alt="Imagem do projeto mobile"  />
+</div>
+<span style='border-bottom:1px solid #21262d'></span>
+</div>
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+## 📌 Sobre
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+**FSW Trips** é um projeto de reservas de hospedagens, onde é possível fazer buscas pelas hospedagens, reservas e, quando necessário, realizar o cancelamento.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+É um projeto totalmente responsivo, podendo ser utilizado em qualquer dispositivo. e conta com varias tecnologias, algumas delas estão citadas abaixo.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+## 🚀 Tecnologias utilizadas
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+O projeto foi desenvolvido utilizando as seguintes tecnologias:
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- [Nextjs](https://nextjs.org/)
+- [Next-auth](https://next-auth.js.org/)
+- [Tailwindcss](https://tailwindcss.com/)
+- [Typescript](https://www.typescriptlang.org/)
+- [Prisma](https://www.prisma.io/)
+- [Zod](https://zod.dev/)
+- [Stripe](https://stripe.com/br)
+- [React-Hook-Form](https://react-hook-form.com/)
+- [Keen-slider](https://keen-slider.io/)
+- [React-toastify](https://fkhadra.github.io/react-toastify/introduction/)
 
-## Learn More
+## ✏ Para iniciar o projeto basta utilizar os seguintes comandos
 
-To learn more about Next.js, take a look at the following resources:
+- Clonar o repositório
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+    <pre><code>git clone https://github.com/CaioMMendes/FSW-Trips</code></pre>
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- Abrir a pasta no VsCode
+- Adicionar um arquivo .env no servidor contendo DATABASE_URL, GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, NEXT_PUBLIC_STRIPE_KEY, STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET_KEY, NEXT_PUBLIC_MAPS_API_KEY, NEXT_AUTH_SECRET e HOST_URL.
+  
+- Executar o projeto
+    <pre><code>npm i</code></pre>
+    <pre><code>npm run dev </code></pre>
 
-## Deploy on Vercel
+## 💻 O projeto pode ser vizualizado acessando o seguinte link
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+<https://fsw-trips-ten.vercel.app/>

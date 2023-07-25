@@ -17,6 +17,12 @@ const nextConfig = {
         port: '',
 
       },
+      {
+        protocol: 'https',
+        hostname: 'cdn.discordapp.com',
+        port: '',
+
+      },
     ],
   },
 }

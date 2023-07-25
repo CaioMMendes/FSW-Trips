@@ -13,8 +13,8 @@ const ImageModal = ({ coverImage, imageUrl, name }: ImageModalProps) => {
     <Gallery>
       <div className="hidden px-5 lg:grid grid-cols-[2fr,1fr,1fr] gap-2 grid-rows-2 lg:order-2">
         <Item
-          original={`${coverImage}/1024/768?image=1`}
-          thumbnail={`${coverImage}/80/60?image=1`}
+          original={`${coverImage}`}
+          thumbnail={`${coverImage}`}
           width="1024"
           height="768"
         >
@@ -23,7 +23,7 @@ const ImageModal = ({ coverImage, imageUrl, name }: ImageModalProps) => {
               <Image
                 ref={ref as any}
                 onClick={open}
-                src={`${coverImage}/80/60?image=1`}
+                src={`${coverImage}`}
                 alt={`${name} images`}
                 className="rounded-tl-lg rounded-bl-lg shadow-md cursor-pointer"
                 fill
@@ -36,8 +36,8 @@ const ImageModal = ({ coverImage, imageUrl, name }: ImageModalProps) => {
         {imageUrl.map((image, index) => {
           return (
             <Item
-              original={`${image}/1024/768?image=1`}
-              thumbnail={`${image}/80/60?image=1`}
+              original={`${image}`}
+              thumbnail={`${image}`}
               width="1024"
               height="768"
               key={index}
@@ -47,7 +47,7 @@ const ImageModal = ({ coverImage, imageUrl, name }: ImageModalProps) => {
                   <Image
                     ref={ref as any}
                     onClick={open}
-                    src={`${image}/80/60?image=1`}
+                    src={`${image}`}
                     alt={`${name} images`}
                     className="rounded-r-lg cursor-pointer shadow-md"
                     fill

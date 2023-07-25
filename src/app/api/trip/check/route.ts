@@ -45,7 +45,6 @@ export async function POST(request: Request) {
     );
   }
   const updatedStartDate = addDays(new Date(req.startDate), 1);
-  console.log(updatedStartDate);
   const reservation = await prisma.tripReservation.findMany({
     where: {
       tripId: req.tripId,

@@ -1,6 +1,5 @@
 "use client";
 
-import Button from "@/components/Button";
 import { differenceInDays } from "date-fns";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
@@ -23,8 +22,6 @@ const InfoBox = ({
   const searchParams = useSearchParams();
   const startDate = new Date(searchParams.get("startDate") as string);
   const endDate = new Date(searchParams.get("endDate") as string);
-  console.log(startDate);
-  console.log(endDate);
   const daysDifference =
     startDate && endDate ? differenceInDays(endDate, startDate) : 0;
   return (

@@ -1,6 +1,4 @@
-import { metadata } from "../../../layout";
 import { prisma } from "@/lib/prisma";
-import { TripReservation } from "@prisma/client";
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
 
@@ -33,8 +31,6 @@ export async function POST(request: Request) {
       status: 200,
     });
   } catch (error) {
-    console.log("error payment", error);
-
     return new NextResponse(
       JSON.stringify({
         success: false,

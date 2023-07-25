@@ -2,17 +2,13 @@
 import Button from "@/components/Button";
 import DatePicker from "@/components/DatePicker";
 import Input from "@/components/Input";
-import { Trip } from "@prisma/client";
-import { Controller, useForm } from "react-hook-form";
-import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { differenceInDays } from "date-fns";
 import { useRouter } from "next/navigation";
-import { addDays } from "date-fns";
-import { setHours } from "date-fns";
-import { useEffect } from "react";
-import { minDate, minDateEnd } from "./MinDate";
+import { Controller, useForm } from "react-hook-form";
+import { z } from "zod";
 import GetDatesInRange from "./GetDatesInRange";
+import { minDate, minDateEnd } from "./MinDate";
 
 interface TripReservationProps {
   tripId: string;
@@ -126,7 +122,6 @@ const TripReservation = ({
   const endDateWatch = watch("endDate");
   const reservedDates = GetDatesInRange(tripsReservations);
 
-  console.log(reservedDates);
   const daysDifference =
     endDateWatch && startDateWatch
       ? differenceInDays(endDateWatch, startDateWatch)

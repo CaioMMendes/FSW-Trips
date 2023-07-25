@@ -35,7 +35,6 @@ const TripDetails = async ({ params }: { params: { tripId: string } }) => {
     return;
   }
   const tripsReservations = await getTripsReservatios(params.tripId);
-  console.log(tripsReservations);
 
   return (
     <div className="lg:px-20 ">

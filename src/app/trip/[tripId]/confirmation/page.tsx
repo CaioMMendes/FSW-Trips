@@ -1,17 +1,17 @@
 "use client";
+import Button from "@/components/Button";
+import { Swalfire } from "@/components/Swalfire";
+import { toastError, toastSuccess } from "@/components/Toastify";
+import { Trip } from "@prisma/client";
+import { loadStripe } from "@stripe/stripe-js";
+import { differenceInDays } from "date-fns";
+import { MoveLeft } from "lucide-react";
+import { useSession } from "next-auth/react";
+import Link from "next/link";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import Details from "./components/Details";
 import InfoBox from "./components/InfoBox";
-import { Trip } from "@prisma/client";
-import { useSearchParams } from "next/navigation";
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
-import Link from "next/link";
-import { MoveLeft } from "lucide-react";
-import Button from "@/components/Button";
-import { toastError, toastSuccess } from "@/components/Toastify";
-import { loadStripe } from "@stripe/stripe-js";
-import { Swalfire } from "@/components/Swalfire";
 interface ITripConfirmation {
   params: {
     tripId: string;
@@ -26,6 +26,8 @@ const TripConfirmation = ({ params }: ITripConfirmation) => {
   const router = useRouter();
   const { status, data } = useSession();
   useEffect(() => {
+    const startDate = new Date(searchParams.get("startDate") as string);
+    const endDate = new Date(searchParams.get("endDate") as string);
     const fetchTrip = async () => {
       const response = await fetch("/api/trip/check", {
         method: "POST",
@@ -35,6 +37,11 @@ const TripConfirmation = ({ params }: ITripConfirmation) => {
           endDate: searchParams.get("endDate"),
         }),
       });
+
+      const daysDifference = differenceInDays(endDate, startDate);
+      if (daysDifference <= 0) {
+        return router.push(`/`);
+      }
 
       const res = await response.json();
       if (res?.error?.code === "TRIP_ALREADY_RESERVED") {

@@ -1,7 +1,6 @@
 "use client";
 
 import TripItem from "@/components/TripItem";
-import { prisma } from "@/lib/prisma";
 import { Trip } from "@prisma/client";
 import { MoveLeft } from "lucide-react";
 import Link from "next/link";
@@ -21,11 +20,6 @@ const TripsFinded = () => {
 
   useEffect(() => {
     const fetchTrips = async () => {
-      // let decodedUrl = "";
-      // if (searchParams.get("text")) {
-      //   decodedUrl = decodeURIComponent(searchParams.get("text")!);
-      // }
-      // console.log(decodedUrl);
       const response = await fetch(
         `/api/trip/search?text=${searchParams.get("text") ?? ""}&startDate=${
           searchParams.get("startDate") ?? ""
@@ -36,7 +30,6 @@ const TripsFinded = () => {
 
       if (response.ok) {
         const data = await response.json();
-        console.log(data);
         setTrips(data);
         data.length > 0
           ? setMessage("Listamos os melhores locais para você!")
