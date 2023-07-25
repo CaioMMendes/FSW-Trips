@@ -3,20 +3,19 @@
 <img  title="Imagem do projeto web" src="https://cdn.discordapp.com/attachments/1124406159328170034/1133463545812619335/image.png" alt="Imagem do projeto web"  />
 <img  title="Imagem do projeto web" src="https://cdn.discordapp.com/attachments/1124406159328170034/1133463609960308766/image.png" alt="Imagem do projeto web"  />
 <img  title="Imagem do projeto web" src="https://cdn.discordapp.com/attachments/1124406159328170034/1133464668288057464/image.png" alt="Imagem do projeto web"  />
-<span style="border-bottom:1px solid #21262d"></span>
 
 <div style="display:flex; justify-content:space-between; ">
 <img width="40%" title="Imagem do projeto mobile" src="https://cdn.discordapp.com/attachments/1124406159328170034/1133465019976269974/image.png" alt="Imagem do projeto mobile"  />
 <img width="40%"  title="Imagem do projeto mobile" src="https://cdn.discordapp.com/attachments/1124406159328170034/1133465155250958406/image.png" alt="Imagem do projeto mobile"  />
 </div>
-<span style='border-bottom:1px solid #21262d'></span>
+
 </div>
 
 ## 📌 Sobre
 
 **FSW Trips** é um projeto de reservas de hospedagens, onde é possível fazer buscas pelas hospedagens, reservas e, quando necessário, realizar o cancelamento.
 
-É um projeto totalmente responsivo, podendo ser utilizado em qualquer dispositivo. e conta com varias tecnologias, algumas delas estão citadas abaixo.
+É totalmente responsivo, podendo ser utilizado em qualquer dispositivo. e conta com varias tecnologias, algumas delas estão citadas abaixo.
 
 ## 🚀 Tecnologias utilizadas
 
