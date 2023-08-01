@@ -15,17 +15,17 @@ const generateSearchQuery = (
       OR: [
         {
           name: {
-            search: text,
+            contains: text,
           },
         },
         {
           description: {
-            search: text,
+            contains: text,
           },
         },
         {
           location: {
-            search: text,
+            contains: text,
           },
         },
       ],
@@ -89,7 +89,6 @@ export async function GET(request: Request) {
     text = text.trim();
     textModified = text.replace(/ /g, " & ");
   }
-
   const trips = await prisma.trip.findMany({
     where: generateSearchQuery(textModified ?? "", startDate, endDate, budget),
   });
