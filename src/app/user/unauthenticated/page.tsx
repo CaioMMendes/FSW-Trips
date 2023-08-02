@@ -3,7 +3,7 @@ import Button from "@/components/Button";
 import { signIn } from "next-auth/react";
 
 const page = () => {
-  const handleLoginClick = () => signIn();
+  const handleLoginClick = () => signIn("google", { callbackUrl: "/" });
   return (
     <div className="flex flex-col items-center justify-center gap-8 h-full w-full">
       <h1 className="flex w-full text-primaryDarker text-4xl font-semibold justify-center items-center text-center">
